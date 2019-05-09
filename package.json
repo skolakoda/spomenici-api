@@ -1,0 +1,24 @@
+{
+  "name": "spomenici-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "dependencies": {
+    "mongodb": "^3.2.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/skolakoda/spomenici-api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/skolakoda/spomenici-api/issues"
+  },
+  "homepage": "https://github.com/skolakoda/spomenici-api#readme"
+}
