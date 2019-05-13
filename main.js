@@ -16,7 +16,6 @@ app.use(bodyParser.json());
 
 MongoClient.connect(URI, (err, db) => {
     if (err) throw err;
-    // console.log("BAZA KREIRANA", db);
     let mydb = db.db("heroku_tvw5zpg7");
     let model1 = {
         "naslov": "Terazijska Cesma",
@@ -57,7 +56,6 @@ MongoClient.connect(URI, (err, db) => {
    
     mydb.collection('spomenici').insertMany([model1, model2, model3], (err, res) => {
         if (err) throw err;
-        // console.log(db);
         db.close();
     })
     db.close()
