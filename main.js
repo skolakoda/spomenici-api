@@ -1,13 +1,13 @@
+require('dotenv').config();
 const MongoClient = require("mongodb").MongoClient;
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 
+
 const spomenici = require('./routes/spomenici');
 const dodaj = require('./routes/dodaj');
-
-const URI = "mongodb://skolakoda:skolakoda523@ds111078.mlab.com:11078/heroku_tvw5zpg7";
-const port = 8080;
+const { port, URI, domain } = require('./config/setup'); 
 
 const app = express();
 app.use(cors());
@@ -16,33 +16,62 @@ app.use(bodyParser.json());
 
 MongoClient.connect(URI, (err, db) => {
     if (err) throw err;
-    console.log("BAZA KREIRANA", db);
+    // console.log("BAZA KREIRANA", db);
     let mydb = db.db("heroku_tvw5zpg7");
-    let model = {
-        "naslov": "",
-        "podnaslov": "",
+    let model1 = {
+        "naslov": "Terazijska Cesma",
+        "podnaslov": "Cesma",
         "kategorija": "",
         "slika": "",
-        "glavni_tekst": "",
+        "glavni_tekst": "Nalazi se ispred hotela Moskva",
         "lokacija": {
             "lat": 0,
             "lon": 0
         },
         "galerija": []
     }
-    mydb.collection("spomenici").insertOne(model, (err, res) => {
+    let model2 = {
+        "naslov": "Pizza trg",
+        "podnaslov": "pizzaa",
+        "kategorija": "",
+        "slika": "",
+        "glavni_tekst": "Solidna pizza",
+        "lokacija": {
+            "lat": 0,
+            "lon": 0
+        },
+        "galerija": []
+    }
+    let model3 = {
+        "naslov": "Bucko",
+        "podnaslov": "govedja ftw",
+        "kategorija": "",
+        "slika": "",
+        "glavni_tekst": "Blasfemija od pice",
+        "lokacija": {
+            "lat": 0,
+            "lon": 0
+        },
+        "galerija": []
+    }
+   
+    mydb.collection('spomenici').insertMany([model1, model2, model3], (err, res) => {
         if (err) throw err;
-        console.log("Ubaceno", res);
-        db.close()
+        // console.log(db);
+        db.close();
     })
     db.close()
 })
+
+//Routes
+app.get('/', (req, res) => res.send('Dobrodosli na Spomenici-API!'));
 
 app.get('/spomenici', spomenici);
 
 app.post('/dodaj-spomenik', dodaj);
 
+//Server
 app.listen(port, () => {
-    console.log(`Started at port: ${port}!`);
+    console.log(`Server at ${domain}!`);
   })
 

@@ -1,8 +1,14 @@
+require('dotenv').config();
 const MongoClient = require("mongodb").MongoClient;
-const URI = "mongodb://skolakoda:skolakoda523@ds111078.mlab.com:11078/heroku_tvw5zpg7";
+
+const URI = process.env.DB_URI;
 
 const spomenici = (req, res) => {
-
-}
+    MongoClient.connect(URI, (err, db) => {
+        if (err) throw err;
+        let mydb = db.db("heroku_tvw5zpg7");
+        mydb.collection('spomenici').find()
+        .toArray((err, podaci) => res.send(podaci))
+})}
 
 module.exports = spomenici
