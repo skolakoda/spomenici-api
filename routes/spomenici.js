@@ -1,7 +1,7 @@
 require('dotenv').config();
 const MongoClient = require("mongodb").MongoClient;
 
-const URI = process.env.DB_URI;
+const { URI } = require('./config/setup');
 
 const spomenici = (req, res) => {
     MongoClient.connect(URI, (err, db) => {
