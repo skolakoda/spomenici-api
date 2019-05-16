@@ -3,7 +3,7 @@ const URI = process.env.DB_URI;
 
 const domain = process.env.NODE_ENV === 'development'
   ? `http://localhost:${port}`
-  : 'https://spomenici-api.herokuapp.com/'
+  : 'https://spomenici-api.herokuapp.com/';
 
 module.exports = {
   port,

@@ -4,10 +4,9 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 
-
+const { port, URI, domain } = require('./config/setup'); 
 const spomenici = require('./routes/spomenici');
 const dodaj = require('./routes/dodaj');
-const { port, URI, domain } = require('./config/setup'); 
 
 const app = express();
 app.use(cors());
