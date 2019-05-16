@@ -7,7 +7,18 @@ API za dodavanje lokacija na adresi https://spomenici-api.herokuapp.com/
 Endpoints:
 - GET /spomenici (vraca sve spomenike)
 - POST /dodaj-spomenik (u izradi)
-
+```
+{
+        "naslov": "Vukov spomenik",
+        "opis": "Veoma lep spomenik",
+        "kategorija": "spomenik",
+        "slika": fajl,
+        "lokacija": {
+            "lat": 0,
+            "lon": 0
+        }
+    }
+```
 
 ## Razvoj
 
