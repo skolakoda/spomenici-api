@@ -6,6 +6,7 @@ API za dodavanje lokacija na adresi https://spomenici-api.herokuapp.com/
 
 Endpoints:
 - GET /spomenici (vraca sve spomenike)
+- GET /spomenik/:id (vraca jedan spomenik)
 - POST /dodaj-spomenik (u izradi)
 ```
 {
