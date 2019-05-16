@@ -3,13 +3,16 @@ const mongo = require("mongodb");
 
 const { URI } = require('../config/setup');
 
-const spomenici = (req, res) => {
+const spomenik = (req, res) => {
     mongo.MongoClient.connect(URI, { useNewUrlParser: true }, (err, db) => {
         if (err) throw err;
         let mydb = db.db("heroku_tvw5zpg7");
+        console.log(req.params);
         mydb.collection('spomenici')
-        .find()
-        .toArray((err, podaci) => res.send(podaci))
-})}
+        .findOne({'_id': mongo.ObjectID(req.params.id)}, (err, spomenik) => {
+            if (err) console.log(err)
+            res.send(spomenik)
+          })        
+})} 
 
-module.exports = spomenici;
+module.exports = spomenik;
