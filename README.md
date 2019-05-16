@@ -1,6 +1,6 @@
 # spomenici-api
 
-API za dodavanje lokacija
+API za dodavanje lokacija na adresi https://spomenici-api.herokuapp.com/
 
 ## Dokumentacija
 
