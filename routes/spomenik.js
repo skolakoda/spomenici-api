@@ -7,7 +7,6 @@ const spomenik = (req, res) => {
     mongo.MongoClient.connect(URI, { useNewUrlParser: true }, (err, db) => {
         if (err) throw err;
         let mydb = db.db("heroku_tvw5zpg7");
-        console.log(req.params);
         mydb.collection('spomenici')
         .findOne({'_id': mongo.ObjectID(req.params.id)}, (err, spomenik) => {
             if (err) console.log(err)
