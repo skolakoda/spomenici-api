@@ -1,5 +1,5 @@
 require('dotenv').config();
-const MongoClient = require("mongodb").MongoClient;
+const mongo = require("mongodb");
 
 const { URI } = require('../config/setup');
 
