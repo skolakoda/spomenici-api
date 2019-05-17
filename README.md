@@ -1,6 +1,6 @@
 # Spomenici API
 
-Javni API za pravljenje turističkih aplikacija (slanje i pretraga lokacija).
+Javni API za pravljenje turističkih aplikacija (slanje, pretraga i brisanje lokacija).
 
 Vidi: https://spomenici-api.herokuapp.com/
 
