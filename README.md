@@ -1,4 +1,4 @@
-# spomenici-api
+# Spomenici API
 
 Javni API za pravljenje turističkih aplikacija (slanje i pretraga lokacija).
 
