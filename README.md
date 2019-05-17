@@ -30,10 +30,11 @@ $ cd spomenici-api
 $ npm install
 ```
 
-- Napraviti `.env` fajl i dodati dve variable
-- DB_URI mora sadrzati link ka "mongodb"(mozete otvoriti na lokalu)
-- NODE_ENV mora imati vrednost "development"
+Da bi aplikacija radila neophodno je napraviti `.env` fajl i dodati dve variable:
 
-`
+- `DB_URI` sa linkom ka MongoDB bazi (ili trazite kredencijale ili otvorite svoju na lokalu)
+- `NODE_ENV` sa vrednoscu "development"
+
+```
 $ npm start
-`
+```
