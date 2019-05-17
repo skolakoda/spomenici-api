@@ -11,15 +11,15 @@ Vidi: https://spomenici-api.herokuapp.com/
 - POST /dodaj-spomenik (u izradi)
 ```
 {
-        "naslov": "Vukov spomenik",
-        "opis": "Veoma lep spomenik",
-        "kategorija": "spomenik",
-        "slika": fajl,
-        "lokacija": {
-            "lat": 0,
-            "lon": 0
-        }
+    "naslov": "Vukov spomenik",
+    "opis": "Veoma lep spomenik",
+    "kategorija": "spomenik",
+    "slika": fajl,
+    "lokacija": {
+        "lat": 0,
+        "lon": 0
     }
+}
 ```
 
 ## Razvoj
