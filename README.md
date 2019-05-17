@@ -1,10 +1,11 @@
 # spomenici-api
 
-API za dodavanje lokacija na adresi https://spomenici-api.herokuapp.com/
+Javni API za pravljenje turističkih aplikacija (slanje i pretraga lokacija).
 
-## Dokumentacija
+Vidi: https://spomenici-api.herokuapp.com/
 
-Endpoints:
+## API Endpoints
+
 - GET /spomenici (vraca sve spomenike)
 - GET /spomenik/:id (vraca jedan spomenik)
 - POST /dodaj-spomenik (u izradi)
