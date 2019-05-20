@@ -1,4 +1,3 @@
-require('dotenv').config();
 const mongo = require("mongodb");
 
 const { URI } = require('../config/setup');
@@ -11,7 +10,7 @@ const spomenik = (req, res) => {
         .findOne({'_id': mongo.ObjectID(req.params.id)}, (err, spomenik) => {
             if (err) console.log(err)
             res.send(spomenik)
-          })        
-})} 
+          })
+})}
 
 module.exports = spomenik;

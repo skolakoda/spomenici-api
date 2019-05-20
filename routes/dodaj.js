@@ -1,4 +1,3 @@
-require('dotenv').config();
 const mongo = require("mongodb");
 
 const { URI } = require('../config/setup');
