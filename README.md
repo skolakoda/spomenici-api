@@ -38,5 +38,5 @@ Da bi aplikacija radila neophodno je napraviti `.env` fajl i dodati dve variable
 Konacno, kad dodate varijable okruzenja, pokrenite:
 
 ```
-$ npm start
+$ npm run dev
 ```
