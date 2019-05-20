@@ -3,18 +3,19 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 
-const { port, domain } = require('./config/setup'); 
+const { port, domain } = require('./config/setup');
 const spomenici = require('./routes/spomenici');
 const spomenik = require('./routes/spomenik');
 const dodaj = require('./routes/dodaj');
+const izmeni = require('./routes/izmeni');
 
-//Config
+// Config
 const app = express();
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-//Routes
+// Routes
 app.get('/', (req, res) => res.send('Dobrodosli na Spomenici-API!'));
 
 app.get('/spomenici', spomenici);
@@ -23,8 +24,9 @@ app.get('/spomenik/:id', spomenik);
 
 app.post('/dodaj-spomenik', dodaj);
 
-//Server
-app.listen(port, () => {
-    console.log(`Server at ${domain}!`);
-  })
+app.put('/izmeni-spomenik', izmeni);
 
+// Server
+app.listen(port, () => {
+  console.log(`Server at ${domain}!`);
+});
