@@ -1,6 +1,6 @@
 const mongo = require("mongodb");
 
-const { URI } = require('../config/setup');
+const { URI, DB_NAME } = require('../config/setup');
 
 const dodaj = (req, res) => {
     res.send('bla');
