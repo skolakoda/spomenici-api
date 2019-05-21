@@ -1,35 +1,34 @@
-const mongo = require("mongodb");
+const mongo = require('mongodb');
 const { URI, DB_NAME } = require('../config/setup');
 
-
-
 const dodaj = (req, res) => {
-    const { naslov, kategorija, lat, lon } = req.body;
+  const { naslov, kategorija, lat, lon } = req.body;
 
-    if (!naslov || !kategorija) {
-        res.send("Niste uneli sva potrebna polja")
-    }
+  if (!naslov || !kategorija) {
+    res.send('Niste uneli sva potrebna polja');
+  }
 
-    mongo.MongoClient.connect(URI, (err, db) => {
-        if (err) throw err;
-        let mydb = db.db(DB_NAME);
-        let model = {
-            naslov, kategorija, "lokacija": {
-                lat, lon
-            }
-        };
+  mongo.MongoClient.connect(URI, { useNewUrlParser: true }, (err, db) => {
+    if (err) throw err;
+    const mydb = db.db(DB_NAME);
+    const model = {
+      naslov,
+      kategorija,
+      lokacija: {
+        lat,
+        lon
+      }
+    };
 
+    console.log('RES', res);
 
-        console.log("RES", res);
+    mydb.collection('spomenici').insertOne(model, (err, res) => {
+      if (err) throw err;
+      db.close();
+      res.send(`Dodat Spomenik ${naslov}`);
+    });
+    db.close();
+  });
+};
 
-
-        mydb.collection('spomenici').insertOne(model, (err, res) => {
-            if (err) throw err;
-            db.close();
-        })
-        db.close()
-        res.send(`Dodat Spomenik ${naslov}`)
-    })
-}
-
-module.exports = dodaj
+module.exports = dodaj;
