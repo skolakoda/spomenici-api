@@ -8,7 +8,9 @@ Vidi: https://spomenici-api.herokuapp.com/
 
 - GET /spomenici (vraca sve spomenike)
 - GET /spomenik/:id (vraca jedan spomenik)
-- POST /dodaj-spomenik (u izradi)
+- POST /dodaj-spomenik
+- PUT /izmeni-spomenik (u izradi)
+
 ```
 {
     "naslov": "Vukov spomenik",
