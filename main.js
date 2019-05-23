@@ -24,7 +24,7 @@ app.get("/spomenik/:id", spomenik)
 
 app.post("/dodaj-spomenik", dodaj)
 
-app.put("/izmeni-spomenik", izmeni)
+app.put("/izmeni-spomenik/:id", izmeni)
 
 // Server
 app.listen(port, () => {
