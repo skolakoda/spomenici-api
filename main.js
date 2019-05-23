@@ -7,6 +7,7 @@ const { port, domain } = require('./config/setup');
 const spomenici = require('./routes/spomenici');
 const spomenik = require('./routes/spomenik');
 const dodaj = require('./routes/dodaj');
+const obrisi = require('./routes/obrisi');
 
 //Config
 const app = express();
@@ -22,6 +23,9 @@ app.get('/spomenici', spomenici);
 app.get('/spomenik/:id', spomenik);
 
 app.post('/dodaj-spomenik', dodaj);
+
+app.delete('/obrisi-spomenik/:id', obrisi);
+
 
 //Server
 app.listen(port, () => {
