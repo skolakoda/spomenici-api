@@ -1,24 +1,24 @@
-const mongo = require('mongodb');
+const mongo = require("mongodb")
 
-const { URI, DB_NAME } = require('../config/setup');
+const { URI, DB_NAME } = require("../config/setup")
 
 const izmeni = (req, res) => {
-  const { naslov, kategorija, lat, lon } = req.body;
+  const { naslov, kategorija, lat, lon } = req.body
 
-  if (!naslov || !kategorija) {
-    res.send('Niste uneli sva potrebna polja');
+  if (!naslov || !kategorija || !lat || !lon) {
+    res.send("Niste uneli sva potrebna polja")
   }
 
   mongo.MongoClient.connect(URI, { useNewUrlParser: true }, (err, db) => {
-    if (err) throw err;
-    const mydb = db.db(DB_NAME);
-    mydb.collection('spomenici').update(
+    if (err) throw err
+    const mydb = db.db(DB_NAME)
+    mydb.collection("spomenici").update(
       // eslint-disable-next-line new-cap
       { _id: mongo.ObjectID(req.params.id) },
       { $set: { naslov, kategorija, lokacija: { lat, lon } } }
-    );
-    res.send('Spomenik je uspesno promenjen!');
-  });
-};
+    )
+    res.send("Spomenik je uspesno promenjen!")
+  })
+}
 
-module.exports = izmeni;
+module.exports = izmeni
