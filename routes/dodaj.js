@@ -20,10 +20,7 @@ const dodaj = (req, res) => {
       }
     }
 
-    mydb.collection("spomenici").insertOne(model, (err, res) => {
-      if (err) throw err
-      db.close()
-    })
+    mydb.collection("spomenici").insertOne(model)
     res.send(`Dodat Spomenik ${naslov}`)
     db.close()
   })
