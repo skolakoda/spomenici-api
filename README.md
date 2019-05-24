@@ -10,6 +10,7 @@ Vidi: https://spomenici-api.herokuapp.com/
 - GET /spomenik/:id (vraca jedan spomenik)
 - POST /dodaj-spomenik
 - PUT /izmeni-spomenik/:id (u izradi)
+- DELETE /obrisi-spomenik/:id (u izradi)
 
 ```
 {
