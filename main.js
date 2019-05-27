@@ -8,6 +8,7 @@ const spomenici = require("./routes/spomenici")
 const spomenik = require("./routes/spomenik")
 const dodaj = require("./routes/dodaj")
 const izmeni = require("./routes/izmeni")
+const obrisi = require("./routes/obrisi")
 
 // Config
 const app = express()
@@ -25,6 +26,8 @@ app.get("/spomenik/:id", spomenik)
 app.post("/dodaj-spomenik", dodaj)
 
 app.put("/izmeni-spomenik/:id", izmeni)
+
+app.delete("/obrisi-spomenik/:id", obrisi)
 
 // Server
 app.listen(port, () => {
