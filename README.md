@@ -36,6 +36,7 @@ $ npm install
 Da bi aplikacija radila neophodno je napraviti `.env` fajl i dodati dve variable:
 
 - `DB_URI` sa linkom ka MongoDB bazi (ili trazite kredencijale ili otvorite svoju na lokalu)
+- `DB_NAME` ime postojece ili novokreirane baze
 - `NODE_ENV` sa vrednoscu "development"
 
 Konacno, kad dodate varijable okruzenja, pokrenite:
