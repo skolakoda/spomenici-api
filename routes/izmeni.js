@@ -12,13 +12,17 @@ const izmeni = (req, res) => {
   mongo.MongoClient.connect(URI, { useNewUrlParser: true }, (err, db) => {
     if (err) throw err
     const mydb = db.db(DB_NAME)
-    mydb.collection("spomenici").updateOne( (err, res) => {
-      if (err) throw err
-      // eslint-disable-next-line new-cap
-      { _id: mongo.ObjectID(req.params.id) },
-      { $set: { naslov, kategorija, lokacija: { lat, lon } } }
-      res.send("Spomenik je uspesno promenjen!")
-    })
+    mydb
+      .collection("spomenici")
+      .updateOne(
+        // eslint-disable-next-line new-cap
+        { _id: mongo.ObjectID(req.params.id) },
+        { $set: { naslov, kategorija, lokacija: { lat, lon } } }
+      )
+      .then(console.log(`Spomenik sa ${req.params.id} je uspesno promenjen`))
+      .catch(err => {
+        console.log(`Greska : ${err}`)
+      })
     db.close()
   })
 }
