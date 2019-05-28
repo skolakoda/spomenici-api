@@ -11,6 +11,7 @@ const izmeni = (req, res) => {
     res.status(400).send("Niste uneli sva potrebna polja")
     return
   }
+
   if (nevalidnaLokacija(lat, lon)) {
     res.status(400).send("Koordinate su izvan dozvoljenog geografskog opsega.")
     return
