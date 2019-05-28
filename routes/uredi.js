@@ -3,8 +3,8 @@ const { MongoClient, ObjectID } = require("mongodb")
 const { URI, DB_NAME } = require("../config/setup")
 const { nevalidnaLokacija } = require("../utils/helpers")
 
-const izmeni = (req, res) => {
-  const { id } = req.params
+const uredi = (req, res) => {
+  const { kolekcija, id } = req.params
   const { naslov, kategorija, opis } = req.body
   const lat = parseFloat(req.body.lat), lon = parseFloat(req.body.lon)
 
@@ -31,7 +31,7 @@ const izmeni = (req, res) => {
     }
 
     db.db(DB_NAME)
-      .collection("spomenici")
+      .collection(kolekcija)
       .updateOne(
         { _id: ObjectID(id) },
         { $set: model }
@@ -46,4 +46,4 @@ const izmeni = (req, res) => {
   })
 }
 
-module.exports = izmeni
+module.exports = uredi

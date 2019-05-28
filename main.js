@@ -7,7 +7,7 @@ const { port, domain } = require("./config/setup")
 const izlistaj = require("./routes/izlistaj")
 const nadji = require("./routes/nadji")
 const dodaj = require("./routes/dodaj")
-const izmeni = require("./routes/izmeni")
+const uredi = require("./routes/uredi")
 const obrisi = require("./routes/obrisi")
 
 // Config
@@ -25,7 +25,7 @@ app.get("/:kolekcija/:id", nadji)
 
 app.post("/:kolekcija/dodaj", dodaj)
 
-app.put("/izmeni-spomenik/:id", izmeni)
+app.put("/:kolekcija/uredi/:id", uredi)
 
 app.delete("/obrisi-spomenik/:id", obrisi)
 
