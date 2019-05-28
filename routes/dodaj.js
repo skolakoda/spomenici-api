@@ -17,15 +17,19 @@ const dodaj = (req, res) => {
 
   mongo.MongoClient.connect(URI, { useNewUrlParser: true }, (err, db) => {
     if (err) throw err
+
     const model = {
       naslov,
       kategorija,
       lokacija: { lat, lon },
       opis
     }
-    db.db(DB_NAME).collection("spomenici").insertOne(model, (err, inserted) => {
-      res.send(JSON.stringify(inserted.ops[0], null, 2))
-    })
+
+    db.db(DB_NAME)
+      .collection("spomenici")
+      .insertOne(model, (err, inserted) => {
+        res.send(JSON.stringify(inserted.ops[0], null, 2))
+      })
     db.close()
   })
 }
