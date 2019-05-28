@@ -10,7 +10,6 @@ const izmeni = (req, res) => {
     res.status(400).send("Niste uneli sva potrebna polja")
     return
   }
-
   if (nevalidnaLokacija(lat, lon)) {
     res.status(400).send("Koordinate su izvan dozvoljenog geografskog opsega.")
     return
@@ -18,17 +17,25 @@ const izmeni = (req, res) => {
 
   mongo.MongoClient.connect(URI, { useNewUrlParser: true }, (err, db) => {
     if (err) throw err
-    const mydb = db.db(DB_NAME)
-    mydb
+
+    const model = {
+      naslov,
+      kategorija,
+      lokacija: { lat, lon }
+    }
+
+    db.db(DB_NAME)
       .collection("spomenici")
       .updateOne(
         // eslint-disable-next-line new-cap
         { _id: mongo.ObjectID(req.params.id) },
-        { $set: { naslov, kategorija, lokacija: { lat, lon } } }
+        { $set: model }
       )
-      .then(console.log(`Spomenik sa ${req.params.id} je uspesno promenjen`))
+      .then(() => {
+        res.send(`Lokacija ${naslov} je uspesno azurirana.`)
+      })
       .catch(err => {
-        console.log(`Greska : ${err}`)
+        res.status(500).send(`Greska : ${err}`)
       })
     db.close()
   })

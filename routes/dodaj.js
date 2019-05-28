@@ -10,7 +10,6 @@ const dodaj = (req, res) => {
     res.status(400).send("Niste uneli sva potrebna polja")
     return
   }
-
   if (nevalidnaLokacija(lat, lon)) {
     res.status(400).send("Koordinate su izvan dozvoljenog geografskog opsega.")
     return
@@ -18,16 +17,12 @@ const dodaj = (req, res) => {
 
   mongo.MongoClient.connect(URI, { useNewUrlParser: true }, (err, db) => {
     if (err) throw err
-    const mydb = db.db(DB_NAME)
     const model = {
       naslov,
       kategorija,
-      lokacija: {
-        lat,
-        lon
-      }
+      lokacija: { lat, lon }
     }
-    mydb.collection("spomenici").insertOne(model, (err, inserted) => {
+    db.db(DB_NAME).collection("spomenici").insertOne(model, (err, inserted) => {
       res.send(JSON.stringify(inserted.ops[0], null, 2))
     })
     db.close()
