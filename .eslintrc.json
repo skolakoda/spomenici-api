@@ -45,14 +45,15 @@
     "space-infix-ops": "warn",
     "comma-spacing": ["warn", { "before": false, "after": true }],
     "spaced-comment": ["warn", "always"],
-    "new-cap": "warn"
+    "new-cap": ["warn", {
+      "capIsNewExceptions": ["ObjectID"]
+    }]
   },
   "parserOptions": {
     "ecmaVersion": 8,
     "sourceType": "module",
     "ecmaFeatures": {
       "impliedStrict": true,
-      "experimentalObjectRestSpread": true,
       "jsx": true
     }
   }

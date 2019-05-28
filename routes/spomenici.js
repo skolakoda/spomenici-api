@@ -1,9 +1,9 @@
-const mongo = require("mongodb")
+const { MongoClient } = require("mongodb")
 
 const { URI, DB_NAME } = require("../config/setup")
 
 const spomenici = (req, res) => {
-  mongo.MongoClient.connect(URI, { useNewUrlParser: true }, (err, db) => {
+  MongoClient.connect(URI, { useNewUrlParser: true }, (err, db) => {
     if (err) throw err
     const mydb = db.db(DB_NAME)
     mydb
