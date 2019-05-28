@@ -2,8 +2,8 @@ const { MongoClient, ObjectID } = require("mongodb")
 
 const { URI, DB_NAME } = require("../config/setup")
 
-const spomenik = (req, res) => {
-  const { id } = req.params
+const nadji = (req, res) => {
+  const { kolekcija, id } = req.params
 
   MongoClient.connect(URI, { useNewUrlParser: true }, (err, db) => {
     if (err) throw err
@@ -12,7 +12,7 @@ const spomenik = (req, res) => {
       return res.status(400).send("Nije validan id.")
 
     db.db(DB_NAME)
-      .collection("spomenici")
+      .collection(kolekcija)
       .findOne({ _id: ObjectID(id) }, (err, spomenik) => {
         if (err) console.log(err)
         res.send(spomenik)
@@ -22,4 +22,4 @@ const spomenik = (req, res) => {
   })
 }
 
-module.exports = spomenik
+module.exports = nadji
