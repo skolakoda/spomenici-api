@@ -1,4 +1,4 @@
-const mongo = require("mongodb")
+const { MongoClient, ObjectID } = require("mongodb")
 
 const { URI, DB_NAME } = require("../config/setup")
 const { nevalidnaLokacija } = require("../utils/helpers")
@@ -17,12 +17,12 @@ const izmeni = (req, res) => {
     return
   }
 
-  if (!mongo.ObjectID.isValid(req.params.id)) {
+  if (!ObjectID.isValid(req.params.id)) {
     res.status(400).send("Nije validan id.")
     return
   }
 
-  mongo.MongoClient.connect(URI, { useNewUrlParser: true }, (err, db) => {
+  MongoClient.connect(URI, { useNewUrlParser: true }, (err, db) => {
     if (err) throw err
 
     const model = {
@@ -35,7 +35,7 @@ const izmeni = (req, res) => {
     db.db(DB_NAME)
       .collection("spomenici")
       .updateOne(
-        { _id: mongo.ObjectID(req.params.id) },
+        { _id: ObjectID(req.params.id) },
         { $set: model }
       )
       .then(() => {

@@ -1,4 +1,5 @@
-const mongo = require("mongodb")
+const { MongoClient } = require("mongodb")
+
 const { URI, DB_NAME } = require("../config/setup")
 const { nevalidnaLokacija } = require("../utils/helpers")
 
@@ -16,7 +17,7 @@ const dodaj = (req, res) => {
     return
   }
 
-  mongo.MongoClient.connect(URI, { useNewUrlParser: true }, (err, db) => {
+  MongoClient.connect(URI, { useNewUrlParser: true }, (err, db) => {
     if (err) throw err
 
     const model = {
