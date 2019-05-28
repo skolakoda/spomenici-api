@@ -8,13 +8,11 @@ const dodaj = (req, res) => {
   const lat = parseFloat(req.body.lat), lon = parseFloat(req.body.lon)
 
   if (!naslov || !kategorija || !lat || !lon) {
-    res.status(400).send("Niste uneli sva potrebna polja")
-    return
+    return res.status(400).send("Niste uneli sva potrebna polja")
   }
 
   if (nevalidnaLokacija(lat, lon)) {
-    res.status(400).send("Koordinate su izvan dozvoljenog geografskog opsega.")
-    return
+    return res.status(400).send("Koordinate su izvan dozvoljenog geografskog opsega.")
   }
 
   MongoClient.connect(URI, { useNewUrlParser: true }, (err, db) => {

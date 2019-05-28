@@ -5,8 +5,7 @@ const { URI, DB_NAME } = require("../config/setup")
 const spomenici = (req, res) => {
   MongoClient.connect(URI, { useNewUrlParser: true }, (err, db) => {
     if (err) throw err
-    const mydb = db.db(DB_NAME)
-    mydb
+    db.db(DB_NAME)
       .collection("spomenici")
       .find()
       .toArray((err, podaci) => res.send(podaci))
