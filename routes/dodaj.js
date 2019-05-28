@@ -3,7 +3,7 @@ const { URI, DB_NAME } = require("../config/setup")
 const { nevalidnaLokacija } = require("../utils/helpers")
 
 const dodaj = (req, res) => {
-  const { naslov, kategorija } = req.body
+  const { naslov, kategorija, opis } = req.body
   const lat = parseFloat(req.body.lat), lon = parseFloat(req.body.lon)
 
   if (!naslov || !kategorija || !lat || !lon) {
@@ -20,7 +20,8 @@ const dodaj = (req, res) => {
     const model = {
       naslov,
       kategorija,
-      lokacija: { lat, lon }
+      lokacija: { lat, lon },
+      opis
     }
     db.db(DB_NAME).collection("spomenici").insertOne(model, (err, inserted) => {
       res.send(JSON.stringify(inserted.ops[0], null, 2))

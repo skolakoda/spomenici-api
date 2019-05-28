@@ -8,7 +8,7 @@ Vidi: https://spomenici-api.herokuapp.com/
 
 - GET /spomenici (vraca sve spomenike)
 - GET /spomenik/id (vraca jedan spomenik)
-- POST /dodaj-spomenik (obavezna polja: naslov, kategorija, lat i lon)
+- POST /dodaj-spomenik (obavezna polja: naslov, kategorija, lat i lon, opciono: opis)
 - PUT /izmeni-spomenik/id (obavezna polja: naslov, kategorija, lat i lon)
 - DELETE /obrisi-spomenik/id
 
