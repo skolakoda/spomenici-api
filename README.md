@@ -10,9 +10,9 @@ Vidi: https://spomenici-api.herokuapp.com/
 - GET /spomenici/id (vraca jedan spomenik)
 - POST /spomenici/dodaj (obavezna polja: naslov, kategorija, lat i lon, opciono: opis)
 - PUT /spomenici/uredi/id (obavezna polja: naslov, kategorija, lat i lon)
-- DELETE /obrisi-spomenik/id
+- DELETE /spomenici/obrisi/id
 
-API sada podrzava vise razlicitih kolekcija. Umesto `spomenici`, mozete uneti bilo koji drugi naziv u rutama.
+API podrzava vise razlicitih kolekcija. Umesto kolekcije `spomenici`, mozete uneti bilo koji naziv u rutama.
 
 ## Razvoj
 

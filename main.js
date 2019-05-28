@@ -27,7 +27,7 @@ app.post("/:kolekcija/dodaj", dodaj)
 
 app.put("/:kolekcija/uredi/:id", uredi)
 
-app.delete("/obrisi-spomenik/:id", obrisi)
+app.delete("/:kolekcija/obrisi/:id", obrisi)
 
 // Server
 app.listen(port, () => {
