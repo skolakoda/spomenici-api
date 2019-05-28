@@ -7,10 +7,10 @@ Vidi: https://spomenici-api.herokuapp.com/
 ## API Endpoints
 
 - GET /spomenici (vraca sve spomenike)
-- GET /spomenik/:id (vraca jedan spomenik)
+- GET /spomenik/id (vraca jedan spomenik)
 - POST /dodaj-spomenik (obavezna polja: naslov, kategorija, lat i lon)
-- PUT /izmeni-spomenik/:id (obavezna polja: naslov, kategorija, lat i lon)
-- DELETE /obrisi-spomenik/:id
+- PUT /izmeni-spomenik/id (obavezna polja: naslov, kategorija, lat i lon)
+- DELETE /obrisi-spomenik/id
 
 ## Razvoj
 
