@@ -2,14 +2,15 @@ const { MongoClient } = require("mongodb")
 
 const { URI, DB_NAME } = require("../config/setup")
 
-const spomenici = (req, res) => {
+const pokazi = (req, res) => {
+  const { kolekcija } = req.params
   MongoClient.connect(URI, { useNewUrlParser: true }, (err, db) => {
     if (err) throw err
     db.db(DB_NAME)
-      .collection("spomenici")
+      .collection(kolekcija)
       .find()
       .toArray((err, podaci) => res.send(podaci))
   })
 }
 
-module.exports = spomenici
+module.exports = pokazi
