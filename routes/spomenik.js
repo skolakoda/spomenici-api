@@ -8,7 +8,6 @@ const spomenik = (req, res) => {
     const mydb = db.db(DB_NAME)
     mydb
       .collection("spomenici")
-      // eslint-disable-next-line new-cap
       .findOne({ _id: mongo.ObjectID(req.params.id) }, (err, spomenik) => {
         if (err) console.log(err)
         res.send(spomenik)

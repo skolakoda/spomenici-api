@@ -1,4 +1,5 @@
 const mongo = require("mongodb")
+
 const { URI, DB_NAME } = require("../config/setup")
 const { nevalidnaLokacija } = require("../utils/helpers")
 
@@ -27,7 +28,6 @@ const izmeni = (req, res) => {
     db.db(DB_NAME)
       .collection("spomenici")
       .updateOne(
-        // eslint-disable-next-line new-cap
         { _id: mongo.ObjectID(req.params.id) },
         { $set: model }
       )
