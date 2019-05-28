@@ -17,6 +17,11 @@ const izmeni = (req, res) => {
     return
   }
 
+  if (!mongo.ObjectID.isValid(req.params.id)) {
+    res.status(400).send("Nije validan id.")
+    return
+  }
+
   mongo.MongoClient.connect(URI, { useNewUrlParser: true }, (err, db) => {
     if (err) throw err
 
