@@ -12,6 +12,8 @@ Vidi: https://spomenici-api.herokuapp.com/
 - PUT /izmeni-spomenik/id (obavezna polja: naslov, kategorija, lat i lon)
 - DELETE /obrisi-spomenik/id
 
+Za registraciju obavezna polja su mail, password i repeat password(ruta u izradi)
+
 ## Razvoj
 
 ```
