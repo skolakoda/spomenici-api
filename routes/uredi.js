@@ -3,23 +3,21 @@ const { MongoClient, ObjectID } = require("mongodb")
 const { URI, DB_NAME } = require("../config/setup")
 const { nevalidnaLokacija } = require("../utils/helpers")
 
-const izmeni = (req, res) => {
+const uredi = (req, res) => {
+  const { kolekcija, id } = req.params
   const { naslov, kategorija, opis } = req.body
   const lat = parseFloat(req.body.lat), lon = parseFloat(req.body.lon)
 
   if (!naslov || !kategorija || !lat || !lon) {
-    res.status(400).send("Niste uneli sva potrebna polja")
-    return
+    return res.status(400).send("Niste uneli sva potrebna polja")
   }
 
   if (nevalidnaLokacija(lat, lon)) {
-    res.status(400).send("Koordinate su izvan dozvoljenog geografskog opsega.")
-    return
+    return res.status(400).send("Koordinate su izvan dozvoljenog geografskog opsega.")
   }
 
-  if (!ObjectID.isValid(req.params.id)) {
-    res.status(400).send("Nije validan id.")
-    return
+  if (!ObjectID.isValid(id)) {
+    return res.status(400).send("Nije validan id.")
   }
 
   MongoClient.connect(URI, { useNewUrlParser: true }, (err, db) => {
@@ -33,9 +31,9 @@ const izmeni = (req, res) => {
     }
 
     db.db(DB_NAME)
-      .collection("spomenici")
+      .collection(kolekcija)
       .updateOne(
-        { _id: ObjectID(req.params.id) },
+        { _id: ObjectID(id) },
         { $set: model }
       )
       .then(() => {
@@ -48,4 +46,4 @@ const izmeni = (req, res) => {
   })
 }
 
-module.exports = izmeni
+module.exports = uredi

@@ -4,10 +4,10 @@ const cors = require("cors")
 const bodyParser = require("body-parser")
 
 const { port, domain } = require("./config/setup")
-const spomenici = require("./routes/spomenici")
-const spomenik = require("./routes/spomenik")
+const izlistaj = require("./routes/izlistaj")
+const nadji = require("./routes/nadji")
 const dodaj = require("./routes/dodaj")
-const izmeni = require("./routes/izmeni")
+const uredi = require("./routes/uredi")
 const obrisi = require("./routes/obrisi")
 
 // Config
@@ -19,15 +19,15 @@ app.use(bodyParser.json())
 // Routes
 app.get("/", (req, res) => res.send("Dobrodosli na Spomenici-API!"))
 
-app.get("/spomenici", spomenici)
+app.get("/:kolekcija", izlistaj)
 
-app.get("/spomenik/:id", spomenik)
+app.get("/:kolekcija/:id", nadji)
 
-app.post("/dodaj-spomenik", dodaj)
+app.post("/:kolekcija/dodaj", dodaj)
 
-app.put("/izmeni-spomenik/:id", izmeni)
+app.put("/:kolekcija/uredi/:id", uredi)
 
-app.delete("/obrisi-spomenik/:id", obrisi)
+app.delete("/:kolekcija/obrisi/:id", obrisi)
 
 // Server
 app.listen(port, () => {

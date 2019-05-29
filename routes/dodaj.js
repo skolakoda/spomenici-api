@@ -4,17 +4,16 @@ const { URI, DB_NAME } = require("../config/setup")
 const { nevalidnaLokacija } = require("../utils/helpers")
 
 const dodaj = (req, res) => {
+  const { kolekcija } = req.params
   const { naslov, kategorija, opis } = req.body
   const lat = parseFloat(req.body.lat), lon = parseFloat(req.body.lon)
 
   if (!naslov || !kategorija || !lat || !lon) {
-    res.status(400).send("Niste uneli sva potrebna polja")
-    return
+    return res.status(400).send("Niste uneli sva potrebna polja")
   }
 
   if (nevalidnaLokacija(lat, lon)) {
-    res.status(400).send("Koordinate su izvan dozvoljenog geografskog opsega.")
-    return
+    return res.status(400).send("Koordinate su izvan dozvoljenog geografskog opsega.")
   }
 
   MongoClient.connect(URI, { useNewUrlParser: true }, (err, db) => {
@@ -28,7 +27,7 @@ const dodaj = (req, res) => {
     }
 
     db.db(DB_NAME)
-      .collection("spomenici")
+      .collection(kolekcija)
       .insertOne(model, (err, inserted) => {
         res.send(JSON.stringify(inserted.ops[0], null, 2))
       })
