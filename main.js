@@ -9,6 +9,7 @@ const nadji = require("./routes/nadji")
 const dodaj = require("./routes/dodaj")
 const uredi = require("./routes/uredi")
 const obrisi = require("./routes/obrisi")
+const registracija = require("./routes/users/registracija")
 
 // Config
 const app = express()
@@ -24,6 +25,8 @@ app.get("/:kolekcija", izlistaj)
 app.get("/:kolekcija/:id", nadji)
 
 app.post("/:kolekcija/dodaj", dodaj)
+
+app.post("/registracija", registracija)
 
 app.put("/:kolekcija/uredi/:id", uredi)
 
