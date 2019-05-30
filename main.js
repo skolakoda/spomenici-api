@@ -5,6 +5,7 @@ const bodyParser = require("body-parser")
 
 const colectionRouter = require("./routes/kolekcije/index")
 const { port, domain } = require("./config/setup")
+const registracija = require("./routes/users/registracija")
 
 // Config
 const app = express()
@@ -19,6 +20,7 @@ app.use((req, res, next) => {
 // Routes
 app.use('/kolekcija', colectionRouter)
 app.get("/", (req, res) => res.send("Dobrodosli na Spomenici-API!"))
+app.post("/registracija", registracija)
 
 // Server
 app.listen(port, () => {
