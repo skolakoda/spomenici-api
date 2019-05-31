@@ -14,7 +14,7 @@ Vidi: https://spomenici-api.herokuapp.com/
 ## User Endpoints
 
 - POST /registracija (obavezna polja: email, password i repeatPassword)
-- GET /users/id (vraca podatke o jednom useru) - nije iztestirano
+- GET /korisnici/id (vraca podatke o jednom useru) - nije iztestirano
 
 
 API podrzava vise razlicitih kolekcija. Umesto kolekcije `spomenici`, mozete uneti bilo koji naziv u rutama.
