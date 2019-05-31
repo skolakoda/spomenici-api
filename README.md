@@ -11,7 +11,8 @@ Vidi: https://spomenici-api.herokuapp.com/
 - POST /spomenici/dodaj (obavezna polja: naslov, kategorija, lat i lon, opciono: opis)
 - PUT /spomenici/uredi/id (obavezna polja: naslov, kategorija, lat i lon)
 - DELETE /spomenici/obrisi/id
-# User Endpoints
+## User Endpoints
+
 - POST /registracija (obavezna polja: email, password i repeatPassword)
 - GET /users/id (vraca podatke o jednom useru)
 
