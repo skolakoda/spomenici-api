@@ -13,7 +13,7 @@ const about = (req, res) => {
       .collection("korisnici")
       .findOne({ _id: ObjectID(id) }, (err, user) => {
         if (err) throw err;
-        res.send(`Pozdrav ${user.email}!. Tvoj password => ${user.pass}`); // trenutno samo
+        res.send(`Pozdrav ${user.email}!. Tvoj ID => ${user._id}`); // trenutno samo
       });
     db.close();
   });
