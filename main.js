@@ -18,6 +18,12 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+//User routes
+
+app.get("/korisnici/:id", about);
+
+app.post("/registracija", registracija);
+
 // Routes
 app.get("/", (req, res) => res.send("Dobrodosli na Spomenici-API!"));
 
@@ -30,12 +36,6 @@ app.post("/:kolekcija/dodaj", dodaj);
 app.put("/:kolekcija/uredi/:id", uredi);
 
 app.delete("/:kolekcija/obrisi/:id", obrisi);
-
-//User routes
-
-app.get("/users/:id", about);
-
-app.post("/registracija", registracija);
 
 // Server
 app.listen(port, () => {
