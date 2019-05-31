@@ -9,9 +9,11 @@ Vidi: https://spomenici-api.herokuapp.com/
 - GET /spomenici (vraca sve spomenike)
 - GET /spomenici/id (vraca jedan spomenik)
 - POST /spomenici/dodaj (obavezna polja: naslov, kategorija, lat i lon, opciono: opis)
-- POST /registracija (obavezna polja: email, password i repeatPassword)
 - PUT /spomenici/uredi/id (obavezna polja: naslov, kategorija, lat i lon)
 - DELETE /spomenici/obrisi/id
+
+- POST /registracija (obavezna polja: email, password i repeatPassword)
+- get /users/id (vraca podatke o jednom useru)
 
 API podrzava vise razlicitih kolekcija. Umesto kolekcije `spomenici`, mozete uneti bilo koji naziv u rutama.
 
