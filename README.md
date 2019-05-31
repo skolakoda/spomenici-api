@@ -13,7 +13,7 @@ Vidi: https://spomenici-api.herokuapp.com/
 - DELETE /spomenici/obrisi/id
 
 - POST /registracija (obavezna polja: email, password i repeatPassword)
-- get /users/id (vraca podatke o jednom useru)
+- GET /users/id (vraca podatke o jednom useru)
 
 API podrzava vise razlicitih kolekcija. Umesto kolekcije `spomenici`, mozete uneti bilo koji naziv u rutama.
 
