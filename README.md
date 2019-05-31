@@ -11,15 +11,15 @@ Vidi: https://spomenici-api.herokuapp.com/
 - POST /spomenici/dodaj (obavezna polja: naslov, kategorija, lat i lon, opciono: opis)
 - PUT /spomenici/uredi/id (obavezna polja: naslov, kategorija, lat i lon)
 - DELETE /spomenici/obrisi/id
-
-
+```
 - POST /registracija (obavezna polja: email, password i repeatPassword)
 - GET /users/id (vraca podatke o jednom useru)
+
 
 API podrzava vise razlicitih kolekcija. Umesto kolekcije `spomenici`, mozete uneti bilo koji naziv u rutama.
 
 Za registraciju obavezna polja su mail, password i repeat password(ruta u izradi)
-
+```
 ## Razvoj
 
 ```
