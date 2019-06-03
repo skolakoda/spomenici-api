@@ -15,14 +15,12 @@ const registracija = (req, res) => {
     return res.status(400).send("Lozinke nisu identicne")
   }
   const pass = md5(password)
-  const repeatPass = md5(repeatPassword)
 
   MongoClient.connect(URI, { useNewUrlParser: true }, (err, db) => {
     if (err) throw err
     const user = {
       email,
-      pass,
-      repeatPass
+      pass
     }
 
     db.db(DB_NAME)
