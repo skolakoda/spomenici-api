@@ -1,6 +1,7 @@
 const { MongoClient, ObjectID } = require("mongodb")
 
 const { URI, DB_NAME } = require("../../config/setup")
+const { ErrRes, SuccRes } = require("../../utils/helpers")
 
 const nadji = (req, res) => {
   const { kolekcija, id } = req.params
@@ -8,13 +9,14 @@ const nadji = (req, res) => {
   MongoClient.connect(URI, { useNewUrlParser: true }, (err, db) => {
     if (err) throw err
 
-    if (!ObjectID.isValid(id)) return res.status(400).send("Nije validan id.")
+    if (!ObjectID.isValid(id))
+      return res.status(400).json(new ErrRes("Nije validan id."))
 
     db.db(DB_NAME)
       .collection(kolekcija)
       .findOne({ _id: ObjectID(id) }, (err, spomenik) => {
-        if (err) throw err
-        res.send(spomenik)
+        if (err) console.log(err)
+        res.send(new SuccRes(null, spomenik))
       })
 
     db.close()
