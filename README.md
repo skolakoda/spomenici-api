@@ -4,6 +4,11 @@ Javni API za pravljenje turističkih aplikacija (slanje, pretraga i brisanje lok
 
 Vidi: https://spomenici-api.herokuapp.com/
 
+## User Endpoints
+
+- POST /registracija (obavezna polja: email, password i repeatPassword)
+- GET /korisnici/id (vraca jednog korisnika)
+
 ## API Endpoints
 
 - GET kolekcija/{naziv} (vraca sve spomenike)
@@ -11,8 +16,6 @@ Vidi: https://spomenici-api.herokuapp.com/
 - POST kolekcija/{naziv}/dodaj (obavezna polja: naslov, kategorija, lat i lon, opciono: opis)
 - PUT kolekcija/{naziv}/uredi/id (obavezna polja: naslov, kategorija, lat i lon)
 - DELETE kolekcija/{naziv}/obrisi/id
-
-- POST /registracija (obavezna polja: email, password i repeatPassword)
 
 API podrzava vise razlicitih kolekcija. Umesto kolekcija `naziv`, mozete uneti bilo koji naziv u rutama.
 
