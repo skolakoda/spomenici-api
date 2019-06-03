@@ -7,7 +7,7 @@ Vidi: https://spomenici-api.herokuapp.com/
 ## User Endpoints
 
 - POST /registracija (obavezna polja: email, password i repeatPassword)
-- GET /user/id (vraca jednog korisnika)
+- GET /korisnici/id (vraca jednog korisnika)
 
 ## API Endpoints
 
