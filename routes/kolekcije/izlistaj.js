@@ -9,7 +9,11 @@ const izlistaj = (req, res) => {
     db.db(DB_NAME)
       .collection(kolekcija)
       .find()
-      .toArray((err, podaci) => res.send(podaci))
+      .toArray((err, podaci) => res.send({
+        status: "success",
+        message: null,
+        data: podaci
+      }))
   })
 }
 

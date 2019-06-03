@@ -4,12 +4,9 @@ Javni API za pravljenje turističkih aplikacija (slanje, pretraga i brisanje lok
 
 Vidi: https://spomenici-api.herokuapp.com/
 
-## User Endpoints
+## API Dokumentacija
 
-- POST /registracija (obavezna polja: email, password i repeatPassword)
-- GET /korisnici/id (vraca jednog korisnika)
-
-## API Endpoints
+### Kolekcije
 
 - GET kolekcija/{naziv} (vraca sve spomenike)
 - GET kolekcija/{naziv}/id (vraca jedan spomenik)
@@ -19,7 +16,36 @@ Vidi: https://spomenici-api.herokuapp.com/
 
 API podrzava vise razlicitih kolekcija. Umesto kolekcija `naziv`, mozete uneti bilo koji naziv u rutama.
 
+### User
+
+- POST /registracija (obavezna polja: email, password i repeatPassword)
+- GET /korisnici/id (vraca jednog korisnika)
+
 Za registraciju obavezna polja su mail, password i repeat password(ruta u izradi)
+
+### JSON Response
+
+Successful request:
+
+```
+{
+  "status": "success",
+  "data": {
+    /* Application-specific data would go here. */
+  },
+  "message": null /* Or optional success message */
+}
+```
+
+Failed request:
+
+```
+{
+  "status": "error",
+  "data": null, /* or optional error payload */
+  "message": "Error xyz has occurred"
+}
+```
 
 ## Razvoj
 
@@ -41,6 +67,6 @@ Konacno, kad dodate varijable okruzenja, pokrenite:
 $ npm run dev
 ```
 
-## Kodni standard
+### Kodni standard
 
 Ovaj projekat koristi [kodni standard Škole koda](https://github.com/skolakoda/kodni-standard).

@@ -9,15 +9,27 @@ const uredi = (req, res) => {
   const lat = parseFloat(req.body.lat), lon = parseFloat(req.body.lon)
 
   if (!naslov || !kategorija || !lat || !lon) {
-    return res.status(400).send("Niste uneli sva potrebna polja")
+    return res.status(400).send({
+      status: "error",
+      message: "Niste uneli sva potrebna polja",
+      data: null
+    })
   }
 
   if (nevalidnaLokacija(lat, lon)) {
-    return res.status(400).send("Koordinate su izvan dozvoljenog geografskog opsega.")
+    return res.status(400).send({
+      status: "error",
+      message: "Koordinate su izvan dozvoljenog geografskog opsega.",
+      data: null
+    })
   }
 
   if (!ObjectID.isValid(id)) {
-    return res.status(400).send("Nije validan id.")
+    return res.status(400).send({
+      status: "error",
+      message: "Nije validan id.",
+      data: null
+    })
   }
 
   MongoClient.connect(URI, { useNewUrlParser: true }, (err, db) => {
@@ -37,10 +49,18 @@ const uredi = (req, res) => {
         { $set: model }
       )
       .then(() => {
-        res.send(`Lokacija ${naslov} je uspesno azurirana.`)
+        res.send({
+          status: "success",
+          message: `Lokacija ${naslov} je uspesno azurirana.`,
+          data: null
+        })
       })
       .catch(err => {
-        res.status(500).send(`Greska : ${err}`)
+        res.status(500).send({
+          status: "error",
+          message: `Greska : ${err}`,
+          data: null
+        })
       })
     db.close()
   })

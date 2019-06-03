@@ -9,13 +9,21 @@ const nadji = (req, res) => {
     if (err) throw err
 
     if (!ObjectID.isValid(id))
-      return res.status(400).send("Nije validan id.")
+      return res.status(400).json({
+        status: "error",
+        message: "Nije validan id.",
+        data: null
+      })
 
     db.db(DB_NAME)
       .collection(kolekcija)
       .findOne({ _id: ObjectID(id) }, (err, spomenik) => {
         if (err) console.log(err)
-        res.send(spomenik)
+        res.send({
+          status: "success",
+          message: null,
+          data: spomenik
+        })
       })
 
     db.close()

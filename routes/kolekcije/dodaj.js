@@ -10,15 +10,23 @@ const dodaj = (req, res) => {
     lon = parseFloat(req.body.lon)
 
   if (!naslov || !kategorija || !lat || !lon) {
-    return res.status(400).send("Niste uneli sva potrebna polja")
+    return res.status(400).send({
+      status: "error",
+      message: "Niste uneli sva potrebna polja",
+      data: null
+    })
   }
 
   if (nevalidnaLokacija(lat, lon)) {
     return res
       .status(400)
-      .send("Koordinate su izvan dozvoljenog geografskog opsega.")
+      .send({
+        status: "error",
+        message: "Koordinate su izvan dozvoljenog geografskog opsega.",
+        data: null
+      })
   }
-  
+
 
   MongoClient.connect(URI, { useNewUrlParser: true }, (err, db) => {
     if (err) throw err
@@ -29,12 +37,16 @@ const dodaj = (req, res) => {
       lokacija: { lat, lon },
       opis
     }
-      
-      db.db(DB_NAME)
+
+    db.db(DB_NAME)
       .collection(kolekcija)
       .insertOne(model, (err, inserted) => {
         if (err) throw err
-        res.json(inserted.ops[0], null, 2)
+        res.json({
+          status: "success",
+          message: "Nova lokacija je uspesno dodata.",
+          data: inserted.ops[0]
+        })
       })
     db.close()
   })
