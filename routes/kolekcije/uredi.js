@@ -1,7 +1,7 @@
 const { MongoClient, ObjectID } = require("mongodb")
 
 const { URI, DB_NAME } = require("../../config/setup")
-const { nevalidnaLokacija } = require("../../utils/helpers")
+const { nevalidnaLokacija, ErrRes, SuccRes } = require("../../utils/helpers")
 
 const uredi = (req, res) => {
   const { kolekcija, id } = req.params
@@ -9,27 +9,15 @@ const uredi = (req, res) => {
   const lat = parseFloat(req.body.lat), lon = parseFloat(req.body.lon)
 
   if (!naslov || !kategorija || !lat || !lon) {
-    return res.status(400).send({
-      status: "error",
-      message: "Niste uneli sva potrebna polja",
-      data: null
-    })
+    return res.status(400).send(new ErrRes("Niste uneli sva potrebna polja"))
   }
 
   if (nevalidnaLokacija(lat, lon)) {
-    return res.status(400).send({
-      status: "error",
-      message: "Koordinate su izvan dozvoljenog geografskog opsega.",
-      data: null
-    })
+    return res.status(400).send(new ErrRes("Koordinate su izvan dozvoljenog geografskog opsega."))
   }
 
   if (!ObjectID.isValid(id)) {
-    return res.status(400).send({
-      status: "error",
-      message: "Nije validan id.",
-      data: null
-    })
+    return res.status(400).send(new ErrRes("Nije validan id."))
   }
 
   MongoClient.connect(URI, { useNewUrlParser: true }, (err, db) => {
@@ -49,18 +37,10 @@ const uredi = (req, res) => {
         { $set: model }
       )
       .then(() => {
-        res.send({
-          status: "success",
-          message: `Lokacija ${naslov} je uspesno azurirana.`,
-          data: null
-        })
+        res.send(new SuccRes(`Lokacija ${naslov} je uspesno azurirana.`))
       })
       .catch(err => {
-        res.status(500).send({
-          status: "error",
-          message: `Greska : ${err}`,
-          data: null
-        })
+        res.status(500).send(new ErrRes(`Greska : ${err}`))
       })
     db.close()
   })

@@ -1,6 +1,7 @@
 const { MongoClient } = require("mongodb")
 
 const { URI, DB_NAME } = require("../../config/setup")
+const { SuccRes } = require("../../utils/helpers")
 
 const izlistaj = (req, res) => {
   const { kolekcija } = req.params
@@ -9,11 +10,7 @@ const izlistaj = (req, res) => {
     db.db(DB_NAME)
       .collection(kolekcija)
       .find()
-      .toArray((err, podaci) => res.send({
-        status: "success",
-        message: null,
-        data: podaci
-      }))
+      .toArray((err, podaci) => res.send(new SuccRes(null, podaci)))
   })
 }
 
