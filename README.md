@@ -6,14 +6,15 @@ Vidi: https://spomenici-api.herokuapp.com/
 
 ## API Endpoints
 
-- GET /spomenici (vraca sve spomenike)
-- GET /spomenici/id (vraca jedan spomenik)
-- POST /spomenici/dodaj (obavezna polja: naslov, kategorija, lat i lon, opciono: opis)
-- POST /registracija (obavezna polja: email, password i repeatPassword)
-- PUT /spomenici/uredi/id (obavezna polja: naslov, kategorija, lat i lon)
-- DELETE /spomenici/obrisi/id
+- GET kolekcija/{naziv} (vraca sve spomenike)
+- GET kolekcija/{naziv}/id (vraca jedan spomenik)
+- POST kolekcija/{naziv}/dodaj (obavezna polja: naslov, kategorija, lat i lon, opciono: opis)
+- PUT kolekcija/{naziv}/uredi/id (obavezna polja: naslov, kategorija, lat i lon)
+- DELETE kolekcija/{naziv}/obrisi/id
 
-API podrzava vise razlicitih kolekcija. Umesto kolekcije `spomenici`, mozete uneti bilo koji naziv u rutama.
+- POST /registracija (obavezna polja: email, password i repeatPassword)
+
+API podrzava vise razlicitih kolekcija. Umesto kolekcija `naziv`, mozete uneti bilo koji naziv u rutama.
 
 Za registraciju obavezna polja su mail, password i repeat password(ruta u izradi)
 

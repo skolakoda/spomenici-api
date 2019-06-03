@@ -1,7 +1,7 @@
 const { MongoClient } = require("mongodb")
 
-const { URI, DB_NAME } = require("../config/setup")
-const { nevalidnaLokacija } = require("../utils/helpers")
+const { URI, DB_NAME } = require("../../config/setup")
+const { nevalidnaLokacija } = require("../../utils/helpers")
 
 const dodaj = (req, res) => {
   const { kolekcija } = req.params
@@ -18,6 +18,7 @@ const dodaj = (req, res) => {
       .status(400)
       .send("Koordinate su izvan dozvoljenog geografskog opsega.")
   }
+  
 
   MongoClient.connect(URI, { useNewUrlParser: true }, (err, db) => {
     if (err) throw err
@@ -28,8 +29,8 @@ const dodaj = (req, res) => {
       lokacija: { lat, lon },
       opis
     }
-
-    db.db(DB_NAME)
+      
+      db.db(DB_NAME)
       .collection(kolekcija)
       .insertOne(model, (err, inserted) => {
         if (err) throw err
