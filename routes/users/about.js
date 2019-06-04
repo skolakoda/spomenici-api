@@ -8,7 +8,8 @@ const about = (req, res) => {
 
   MongoClient.connect(URI, { useNewUrlParser: true }, (err, db) => {
     if (err) throw err
-    if (!ObjectID.isValid(id)) return res.status(400).send(new ErrRes("Nije validan id."))
+    if (!ObjectID.isValid(id))
+      return res.status(400).send(new ErrRes("Nije validan id."))
 
     db.db(DB_NAME)
       .collection("korisnici")

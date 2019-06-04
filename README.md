@@ -20,6 +20,7 @@ API podrzava vise razlicitih kolekcija. Umesto kolekcija `naziv`, mozete uneti b
 
 - POST /registracija (obavezna polja: email, password i repeatPassword)
 - GET /korisnici/id (vraca jednog korisnika)
+- GET /korisnici/login (nije do kraja iztestirano)
 
 Za registraciju obavezna polja su mail, password i repeat password(ruta u izradi)
 
@@ -55,11 +56,12 @@ $ cd spomenici-api
 $ npm install
 ```
 
-Da bi aplikacija radila neophodno je napraviti `.env` fajl i dodati dve variable:
+Da bi aplikacija radila neophodno je napraviti `.env` fajl i dodati 4 variable:
 
 - `DB_URI` sa linkom ka MongoDB bazi (ili trazite kredencijale ili otvorite svoju na lokalu)
 - `DB_NAME` ime postojece ili novokreirane baze
 - `NODE_ENV` sa vrednoscu "development"
+- `TOKEN_KLJUCH` sa vrednoscu iz heroku dashboard settings-a
 
 Konacno, kad dodate varijable okruzenja, pokrenite:
 
