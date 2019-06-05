@@ -22,7 +22,6 @@ API podrzava vise razlicitih kolekcija. Umesto kolekcija `naziv`, mozete uneti b
 - GET /korisnici/id (vraca jednog korisnika)
 - GET /korisnici/login (nije do kraja iztestirano)
 
-Za registraciju obavezna polja su mail, password i repeat password(ruta u izradi)
 
 ### JSON Response
 
