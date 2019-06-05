@@ -1,7 +1,9 @@
 const { MongoClient, ObjectID } = require("mongodb")
 
 const { URI, DB_NAME } = require("../../config/setup")
-const { nevalidnaLokacija, ErrRes, SuccRes } = require("../../utils/helpers")
+const { nevalidnaLokacija } = require("../../utils/helpers")
+const { ErrRes, SuccRes } = require("../../utils/interfaces")
+
 
 const uredi = (req, res) => {
   const { kolekcija, id } = req.params

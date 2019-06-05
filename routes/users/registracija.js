@@ -2,7 +2,8 @@ const { MongoClient } = require("mongodb")
 const md5 = require("md5")
 
 const { URI, DB_NAME } = require("../../config/setup")
-const { emailCheck, ErrRes, SuccRes } = require("../../utils/helpers")
+const { emailCheck } = require("../../utils/helpers")
+const { ErrRes, SuccRes } = require("../../utils/interfaces")
 
 const registracija = (req, res) => {
   const { email, password, repeatPassword } = req.body

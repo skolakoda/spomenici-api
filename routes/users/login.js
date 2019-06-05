@@ -3,7 +3,7 @@ const md5 = require("md5")
 const jwt = require("jsonwebtoken")
 
 const { URI, DB_NAME, tokenKey } = require("../../config/setup")
-const { ErrRes, SuccRes } = require("../../utils/helpers")
+const { ErrRes, SuccRes } = require("../../utils/interfaces")
 
 const login = (req, res) => {
   const { email, password } = req.body
