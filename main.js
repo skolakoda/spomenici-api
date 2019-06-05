@@ -12,6 +12,7 @@ const app = express()
 app.use(cors())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
+// TODO: odvojiti logger u helpers i dodati ga samo kad je development
 app.use((req, res, next) => {
   console.log(req.method, req.url)
   next()
