@@ -1,7 +1,7 @@
 const { MongoClient, ObjectID } = require("mongodb")
 
 const { URI, DB_NAME } = require("../../config/setup")
-const { ErrRes, SuccRes } = require("../../utils/helpers")
+const { ErrRes, SuccRes } = require("../../utils/interfaces")
 
 const about = (req, res) => {
   const { id } = req.params
