@@ -7,7 +7,10 @@ const nadji = require("./nadji")
 const dodaj = require("./dodaj")
 const uredi = require("./uredi")
 const obrisi = require("./obrisi")
+const kategorije = require("./kategorije")
 
+
+router.get("/:naziv/kategorije", kategorije)
 
 router.get("/:kolekcija", izlistaj)
 
