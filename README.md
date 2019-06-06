@@ -9,7 +9,8 @@ Vidi: https://spomenici-api.herokuapp.com/
 ### Kolekcije
 
 - GET kolekcija/{naziv} (vraca sve spomenike)
-- GET kolekcija/{naziv}/id (vraca jedan spomenik)
+- GET kolekcija/{naziv}/nadji/id (vraca jedan spomenik)
+- GET kolekcija/{naziv}/kategorije (vraca sve kategorije po kolekciji)
 - POST kolekcija/{naziv}/dodaj (obavezna polja: naslov, kategorija, lat i lon, opciono: opis)
 - PUT kolekcija/{naziv}/uredi/id (obavezna polja: naslov, kategorija, lat i lon)
 - DELETE kolekcija/{naziv}/obrisi/id
