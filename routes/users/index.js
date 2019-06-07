@@ -6,7 +6,7 @@ const registracija = require("./registracija")
 const login = require("./login")
 
 router.post("/login", login)
-router.get("/:id", about)
+router.get("/pokazi/:id", about)
 router.post("/registracija", registracija)
 
 module.exports = router
