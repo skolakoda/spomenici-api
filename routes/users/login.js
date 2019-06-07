@@ -18,10 +18,11 @@ const login = (req, res) => {
         }
         const token = jwt.sign({ user }, tokenKey, { expiresIn: "30d" })
         res.send(new SuccRes("Token sent!", token))
+        const date = Date()
         const tokenModel = {
           userId: user._id,
           token,
-          dodat: user._id.getTimestamp()
+          dodat: date.toString()
         }
 
         db.db(DB_NAME)
