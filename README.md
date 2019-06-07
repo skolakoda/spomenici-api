@@ -20,7 +20,7 @@ API podrzava vise razlicitih kolekcija. Umesto kolekcija `naziv`, mozete uneti b
 ### User
 
 - POST /korisnici/registracija (obavezna polja: email, password i repeatPassword)
-- GET /korisnici/id (vraca jednog korisnika)
+- GET /korisnici/pokazi/id (vraca jednog korisnika)
 - GET /korisnici/login
 
 
