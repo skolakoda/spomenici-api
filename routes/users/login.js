@@ -25,7 +25,7 @@ const login = (req, res) => {
         }
 
         db.db(DB_NAME)
-          .collection("token")
+          .collection("tokens")
           .insertOne(tokenModel, err => {
             if (err) throw err
             console.log(`Dodato u ${tokenModel.dodat}`)
