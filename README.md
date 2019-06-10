@@ -23,6 +23,7 @@ API podrzava vise razlicitih kolekcija. Umesto kolekcija `naziv`, mozete uneti b
 - GET /korisnici/pokazi/id (vraca jednog korisnika)
 - GET /korisnici/login
 
+U headeru setovati polje auth sa vrednoscu "Bearer ${token}"
 
 ### JSON Response
 
