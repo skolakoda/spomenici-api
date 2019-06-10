@@ -29,7 +29,11 @@ const registracija = (req, res) => {
       .collection("korisnici")
       .insertOne(user, err => {
         if (err) throw err
-        res.send(new SuccRes(`Hej ${email}! Uspesno ste kreirali nalog!`))
+        res.send(
+          new SuccRes(
+            `Hej ${email}! Uspesno ste kreirali nalog! Sada se mozete ulogovati`
+          )
+        )
       })
     db.close()
   })
