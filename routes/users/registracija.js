@@ -21,7 +21,8 @@ const registracija = (req, res) => {
     if (err) throw err
     const user = {
       email,
-      pass
+      pass,
+      role: "user"
     }
 
     db.db(DB_NAME)
