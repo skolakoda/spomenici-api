@@ -27,7 +27,7 @@
   "scripts": {
     "start": "node main.js",
     "dev": "nodemon main.js",
-    "lint": "eslint main.js",
+    "lint": "eslint . --fix",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

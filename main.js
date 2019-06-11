@@ -1,11 +1,11 @@
-require("dotenv").config()
-const express = require("express")
-const cors = require("cors")
-const bodyParser = require("body-parser")
+require('dotenv').config()
+const express = require('express')
+const cors = require('cors')
+const bodyParser = require('body-parser')
 
-const colectionRouter = require("./routes/kolekcije/index")
-const userRouter = require("./routes/users/index")
-const { port, domain } = require("./config/setup")
+const colectionRouter = require('./routes/kolekcije/index')
+const userRouter = require('./routes/users/index')
+const { port, domain } = require('./config/setup')
 
 // Config
 const app = express()
@@ -19,9 +19,9 @@ app.use((req, res, next) => {
 })
 
 // Routes
-app.use("/korisnici", userRouter)
-app.use("/kolekcija", colectionRouter)
-app.get("/", (req, res) => res.send("Dobrodosli na Spomenici-API!"))
+app.use('/korisnici', userRouter)
+app.use('/kolekcija', colectionRouter)
+app.get('/', (req, res) => res.send('Dobrodosli na Spomenici-API!'))
 
 // Server
 app.listen(port, () => {

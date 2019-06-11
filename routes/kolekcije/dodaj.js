@@ -1,9 +1,9 @@
-const { MongoClient } = require("mongodb")
-const jwt = require("jsonwebtoken")
+const { MongoClient } = require('mongodb')
+const jwt = require('jsonwebtoken')
 
-const { URI, DB_NAME, tokenKey } = require("../../config/setup")
-const { nevalidnaLokacija } = require("../../utils/helpers")
-const { ErrRes, SuccRes } = require("../../utils/interfaces")
+const { URI, DB_NAME, tokenKey } = require('../../config/setup')
+const { nevalidnaLokacija } = require('../../utils/helpers')
+const { ErrRes, SuccRes } = require('../../utils/interfaces')
 
 const dodaj = (req, res) => {
   jwt.verify(req.token, tokenKey, err => {
@@ -12,7 +12,7 @@ const dodaj = (req, res) => {
         .status(403)
         .send(
           new ErrRes(
-            "Samo ulogovani korisnik moze editovati lokaciju ili pogresan token"
+            'Samo ulogovani korisnik moze editovati lokaciju ili pogresan token'
           )
         )
     }
@@ -22,13 +22,13 @@ const dodaj = (req, res) => {
       lon = parseFloat(req.body.lon)
 
     if (!naslov || !kategorija || !lat || !lon) {
-      return res.status(400).send(new ErrRes("Niste uneli sva potrebna polja"))
+      return res.status(400).send(new ErrRes('Niste uneli sva potrebna polja'))
     }
 
     if (nevalidnaLokacija(lat, lon)) {
       return res
         .status(400)
-        .send(new ErrRes("Koordinate su izvan dozvoljenog geografskog opsega."))
+        .send(new ErrRes('Koordinate su izvan dozvoljenog geografskog opsega.'))
     }
 
     MongoClient.connect(URI, { useNewUrlParser: true }, (err, db) => {
@@ -46,7 +46,7 @@ const dodaj = (req, res) => {
         .insertOne(model, (err, inserted) => {
           if (err) throw err
           res.json(
-            new SuccRes("Nova lokacija je uspesno dodata.", inserted.ops[0])
+            new SuccRes('Nova lokacija je uspesno dodata.', inserted.ops[0])
           )
         })
       db.close()

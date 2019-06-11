@@ -1,8 +1,8 @@
-const { MongoClient, ObjectID } = require("mongodb")
-const jwt = require("jsonwebtoken")
+const { MongoClient, ObjectID } = require('mongodb')
+const jwt = require('jsonwebtoken')
 
-const { URI, DB_NAME, tokenKey } = require("../../config/setup")
-const { ErrRes, SuccRes } = require("../../utils/interfaces")
+const { URI, DB_NAME, tokenKey } = require('../../config/setup')
+const { ErrRes, SuccRes } = require('../../utils/interfaces')
 
 const obrisi = (req, res) => {
   jwt.verify(req.token, tokenKey, err => {
@@ -10,13 +10,13 @@ const obrisi = (req, res) => {
       return res
         .status(403)
         .send(
-          new ErrRes("Samo admin moze obrisati lokaciju ili pogresan token")
+          new ErrRes('Samo admin moze obrisati lokaciju ili pogresan token')
         )
     }
     const { kolekcija, id } = req.params
 
     if (!ObjectID.isValid(id)) {
-      return res.status(400).send(new ErrRes("Nije validan id."))
+      return res.status(400).send(new ErrRes('Nije validan id.'))
     }
 
     MongoClient.connect(URI, { useNewUrlParser: true }, (err, db) => {

@@ -38,7 +38,7 @@
     "object-shorthand": "error",
     "no-unexpected-multiline": "error",
     "semi": ["warn", "never"],
-    "quotes": ["warn", "double"],
+    "quotes": ["warn", "single"],
     "prefer-const": "warn",
     "prefer-arrow-callback": "warn",
     "arrow-parens": ["warn", "as-needed"],
@@ -48,7 +48,7 @@
     "new-cap": [
       "warn",
       {
-        "capIsNewExceptions": ["ObjectID"]
+        "capIsNewExceptions": ["ObjectID", "Router"]
       }
     ]
   },
