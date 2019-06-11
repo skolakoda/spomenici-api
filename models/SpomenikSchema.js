@@ -1,13 +1,29 @@
 const mongoose = require('mongoose')
+const uniqueValidator = require('mongoose-unique-validator')
 
 const SpomenikSchema = new mongoose.Schema({
-  naslov:	String,
+  naslov:	{
+    type: String,
+    unique : true,
+    required: true
+  },
   opis:	String,
-  kategorija:	String,
+  kategorija:	{
+    type: String,
+    required: true
+  },
   lokacija: {
-    lat: Number,
-    lon: Number
+    lat: {
+      type: Number,
+      required: true
+    },
+    lon: {
+      type: Number,
+      required: true
+    }
   }
 })
+
+SpomenikSchema.plugin(uniqueValidator) // mora da bi radilo unique
 
 module.exports = SpomenikSchema

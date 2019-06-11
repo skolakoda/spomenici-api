@@ -10,9 +10,10 @@ mongoose.connect(URI, { useNewUrlParser: true })
 
 const Spomenik = mongoose.model('Spomenik', SpomenikSchema, 'spomenici')
 
+// dodati jedinstven naslov
 async function createSpomenik() {
   const spomenik = new Spomenik({
-    naslov:	'Kalemegdanska tvrdjava',
+    naslov: 'Kalemegdan',
     opis:	'Tvrdjava na Kalemegdanu.',
     kategorija:	'tvrdjava',
     lokacija: {
@@ -21,11 +22,12 @@ async function createSpomenik() {
     }
   })
 
-  const result = await spomenik.save()
-  console.log(result)
+  spomenik.save()
+    .then(res => console.log(res))
+    .catch(err => console.error(err.message))
 }
 
-// createSpomenik()
+createSpomenik()
 
 async function getSpomenici() {
   const spomenici = await Spomenik
@@ -35,4 +37,4 @@ async function getSpomenici() {
   console.log(spomenici)
 }
 
-getSpomenici()
+// getSpomenici()
