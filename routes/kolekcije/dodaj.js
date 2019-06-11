@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken')
-const mongoose = require('mongoose')
+const { model } = require('mongoose')
 
 const { tokenKey } = require('../../utils/config')
 const { ErrRes, SuccRes } = require('../../utils/interfaces')
@@ -15,7 +15,7 @@ const dodaj = (req, res) => {
     const lat = parseFloat(req.body.lat)
     const lon = parseFloat(req.body.lon)
 
-    const Spomenik = mongoose.model('Spomenik', SpomenikSchema, kolekcija)
+    const Spomenik = model('Spomenik', SpomenikSchema, kolekcija)
     const spomenik = new Spomenik({
       naslov,
       opis,

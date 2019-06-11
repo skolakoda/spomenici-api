@@ -1,20 +1,12 @@
-const { MongoClient } = require('mongodb')
+const { model } = require('mongoose')
+const SpomenikSchema = require('../../models/SpomenikSchema')
 
-const { URI, DB_NAME } = require('../../utils/config')
+const kategorije = async(req, res) => {
+  const { kolekcija } = req.params
+  const Spomenik = model('Spomenik', SpomenikSchema, kolekcija)
 
-const kategorije = (req, res) => {
-  const {kolekcija} = req.params
-
-  MongoClient.connect(URI, { useNewUrlParser: true }, (err, db) => {
-    if (err) throw err
-
-    db.db(DB_NAME)
-      .collection(kolekcija)
-      .distinct('kategorija')
-      .then(data => res.send(data))
-
-  })
-
+  Spomenik.distinct('kategorija')
+    .then(data => res.send(data))
 }
 
 module.exports = kategorije
