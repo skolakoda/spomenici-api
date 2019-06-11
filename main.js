@@ -5,7 +5,7 @@ const bodyParser = require('body-parser')
 
 const colectionRouter = require('./routes/kolekcije/index')
 const userRouter = require('./routes/users/index')
-const { port, domain } = require('./config/setup')
+const { port, domain } = require('./utils/config')
 
 // Config
 const app = express()

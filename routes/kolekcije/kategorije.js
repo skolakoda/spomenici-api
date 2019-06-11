@@ -1,6 +1,6 @@
 const { MongoClient } = require('mongodb')
 
-const { URI, DB_NAME } = require('../../config/setup')
+const { URI, DB_NAME } = require('../../utils/config')
 
 const kategorije = (req, res) => {
   const {kolekcija} = req.params

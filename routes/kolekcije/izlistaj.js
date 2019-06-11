@@ -1,6 +1,6 @@
 const { MongoClient } = require('mongodb')
 
-const { URI, DB_NAME } = require('../../config/setup')
+const { URI, DB_NAME } = require('../../utils/config')
 const { SuccRes } = require('../../utils/interfaces')
 
 const izlistaj = (req, res) => {

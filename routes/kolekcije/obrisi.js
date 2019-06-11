@@ -1,7 +1,7 @@
 const { MongoClient, ObjectID } = require('mongodb')
 const jwt = require('jsonwebtoken')
 
-const { URI, DB_NAME, tokenKey } = require('../../config/setup')
+const { URI, DB_NAME, tokenKey } = require('../../utils/config')
 const { ErrRes, SuccRes } = require('../../utils/interfaces')
 
 const obrisi = (req, res) => {

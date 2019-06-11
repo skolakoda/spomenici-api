@@ -1,7 +1,7 @@
 const { MongoClient } = require('mongodb')
 const md5 = require('md5')
 
-const { URI, DB_NAME } = require('../../config/setup')
+const { URI, DB_NAME } = require('../../utils/config')
 const { emailCheck } = require('../../utils/helpers')
 const { ErrRes, SuccRes } = require('../../utils/interfaces')
 
