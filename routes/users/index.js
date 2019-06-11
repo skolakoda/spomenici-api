@@ -1,12 +1,14 @@
-const express = require("express")
-const router = express.Router()
+const express = require("express");
+const router = express.Router();
 
-const about = require("./about")
-const registracija = require("./registracija")
-const login = require("./login")
+const { tokenCheck } = require("../../utils/helpers");
 
-router.post("/login", login)
-router.get("/pokazi/:id", about)
-router.post("/registracija", registracija)
+const about = require("./about");
+const registracija = require("./registracija");
+const login = require("./login");
 
-module.exports = router
+router.post("/login", login);
+router.get("/pokazi/:id", tokenCheck, about);
+router.post("/registracija", registracija);
+
+module.exports = router;
