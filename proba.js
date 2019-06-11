@@ -4,14 +4,16 @@ const mongoose = require('mongoose')
 const { URI } = require('./utils/config')
 const SpomenikSchema = require('./models/SpomenikSchema')
 
-mongoose.connect(URI, { useNewUrlParser: true })
+mongoose.set('useCreateIndex', true) // https://mongoosejs.com/docs/deprecations.html#ensureindex
+mongoose.set('useNewUrlParser', true)
+
+mongoose.connect(URI)
   .then(() => console.log('konektovan...'))
   .catch(err => console.error('ne moze se kontektovat', err))
 
 const Spomenik = mongoose.model('Spomenik', SpomenikSchema, 'spomenici')
 
-// dodati jedinstven naslov
-async function createSpomenik() {
+function createSpomenik() {
   const spomenik = new Spomenik({
     naslov: 'Kalemegdan',
     opis:	'Tvrdjava na Kalemegdanu.',

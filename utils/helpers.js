@@ -6,12 +6,12 @@ const emailCheck = email => {
   return regex.test(email)
 }
 
+// prebacuje token iz headera u req?
 const tokenCheck = (req, res, next) => {
-  const bearerHeader = req.headers['auth']
-  if (typeof bearerHeader !== 'undefined') {
-    const bearer = bearerHeader.split(' ')
-    const bearerToken = bearer[1]
-    req.token = bearerToken
+  const auth = req.headers['auth']
+  if (typeof auth !== 'undefined') {
+    const token = auth.split(' ')[1]
+    req.token = token
     next()
   } else {
     res.sendStatus(403)
