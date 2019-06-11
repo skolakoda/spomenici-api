@@ -1,29 +1,23 @@
-const { MongoClient, ObjectID } = require('mongodb')
+const { ObjectID } = require('mongodb')
 const jwt = require('jsonwebtoken')
+const { model } = require('mongoose')
 
-const { URI, DB_NAME, tokenKey } = require('../../utils/config')
+const SpomenikSchema = require('../../models/SpomenikSchema')
+const { tokenKey } = require('../../utils/config')
 const { ErrRes, SuccRes } = require('../../utils/interfaces')
 
 const obrisi = (req, res) => {
-  jwt.verify(req.token, tokenKey, err => {
+  jwt.verify(req.token, tokenKey, async err => {
     if (err) return res.status(403).send(new ErrRes('Nevalidan token'))
 
     const { kolekcija, id } = req.params
-
     if (!ObjectID.isValid(id)) {
       return res.status(400).send(new ErrRes('Nije validan id.'))
     }
 
-    MongoClient.connect(URI, { useNewUrlParser: true }, (err, db) => {
-      if (err) throw err
-      db.db(DB_NAME)
-        .collection(kolekcija)
-        .deleteOne({ _id: ObjectID(id) })
-        .then(result =>
-          res.send(new SuccRes(`Obrisano ${result.deletedCount} lokacija.`))
-        )
-        .catch(err => res.status(500).send(new ErrRes(`Greska: ${err}`)))
-    })
+    const Spomenik = model('Spomenik', SpomenikSchema, kolekcija)
+    const obrisano = await Spomenik.deleteOne({ _id: ObjectID(id) })
+    res.send(new SuccRes(`Obrisano ${obrisano.deletedCount} lokacija.`))
   })
 }
 
