@@ -1,62 +1,33 @@
-const { MongoClient, ObjectID } = require('mongodb')
+const { model } = require('mongoose')
+const { ObjectID } = require('mongodb')
 const jwt = require('jsonwebtoken')
 
-const { URI, DB_NAME, tokenKey } = require('../../utils/config')
-const { nevalidnaLokacija } = require('../../utils/helpers')
+const { tokenKey } = require('../../utils/config')
 const { ErrRes, SuccRes } = require('../../utils/interfaces')
+const SpomenikSchema = require('../../models/SpomenikSchema')
 
-const uredi = (req, res) => {
-  jwt.verify(req.token, tokenKey, err => {
-    if (err) {
-      return res
-        .status(403)
-        .send(
-          new ErrRes(
-            'Samo ulogovani korisnik moze editovati lokaciju ili pogresan token'
-          )
-        )
-    }
+const uredi = async(req, res) => {
+  jwt.verify(req.token, tokenKey, async err => {
+    if (err) return res.status(403).send(new ErrRes('Nevalidan token'))
 
     const { kolekcija, id } = req.params
-    const { naslov, kategorija, opis } = req.body
-    const lat = parseFloat(req.body.lat),
-      lon = parseFloat(req.body.lon)
+    const { naslov, kategorija, opis, lat, lon } = req.body
 
-    if (!naslov || !kategorija || !lat || !lon) {
-      return res.status(400).send(new ErrRes('Niste uneli sva potrebna polja'))
-    }
-
-    if (nevalidnaLokacija(lat, lon)) {
-      return res
-        .status(400)
-        .send(new ErrRes('Koordinate su izvan dozvoljenog geografskog opsega.'))
-    }
-
-    if (!ObjectID.isValid(id)) {
+    if (!ObjectID.isValid(id))
       return res.status(400).send(new ErrRes('Nije validan id.'))
-    }
 
-    MongoClient.connect(URI, { useNewUrlParser: true }, (err, db) => {
-      if (err) throw err
+    const Spomenik = model('Spomenik', SpomenikSchema, kolekcija)
+    const spomenik = await Spomenik.findOne({ _id: ObjectID(id) })
 
-      const model = {
-        naslov,
-        kategorija,
-        lokacija: { lat, lon },
-        opis
-      }
+    if (naslov) spomenik.naslov = naslov
+    if (kategorija) spomenik.kategorija = kategorija
+    if (opis) spomenik.opis = opis
+    if (lat && lon) spomenik.lokacija = { lat, lon }
 
-      db.db(DB_NAME)
-        .collection(kolekcija)
-        .updateOne({ _id: ObjectID(id) }, { $set: model })
-        .then(() => {
-          res.send(new SuccRes(`Lokacija ${naslov} je uspesno azurirana.`))
-        })
-        .catch(err => {
-          res.status(500).send(new ErrRes(`Greska : ${err}`))
-        })
-      db.close()
-    })
+    spomenik.save()
+      .then(data => res.json(new SuccRes('Lokacija je uspesno azurirana.', data)))
+      .catch(err => res.status(400).send(`Greska : ${err.message}`))
+
   })
 }
 

@@ -6,7 +6,7 @@ const SpomenikSchema = require('../../models/SpomenikSchema')
 const { tokenKey } = require('../../utils/config')
 const { ErrRes, SuccRes } = require('../../utils/interfaces')
 
-const obrisi = (req, res) => {
+const obrisi = async(req, res) => {
   jwt.verify(req.token, tokenKey, async err => {
     if (err) return res.status(403).send(new ErrRes('Nevalidan token'))
 

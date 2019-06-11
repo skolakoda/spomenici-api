@@ -11,9 +11,7 @@ const dodaj = (req, res) => {
     if (err) return res.status(403).send(new ErrRes('Nevalidan token'))
 
     const { kolekcija } = req.params
-    const { naslov, kategorija, opis } = req.body
-    const lat = parseFloat(req.body.lat)
-    const lon = parseFloat(req.body.lon)
+    const { naslov, kategorija, opis, lat, lon } = req.body
 
     const Spomenik = model('Spomenik', SpomenikSchema, kolekcija)
     const spomenik = new Spomenik({
