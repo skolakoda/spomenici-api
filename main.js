@@ -1,11 +1,13 @@
-require("dotenv").config()
-const express = require("express")
-const cors = require("cors")
-const bodyParser = require("body-parser")
+require('dotenv').config()
+const express = require('express')
+const cors = require('cors')
+const bodyParser = require('body-parser')
+const mongoose = require('mongoose')
 
-const colectionRouter = require("./routes/kolekcije/index")
-const userRouter = require("./routes/users/index")
-const { port, domain } = require("./config/setup")
+const { port, domain, URI } = require('./utils/config')
+// TODO: odvojiti ruter u zaseban fajl
+const colectionRouter = require('./routes/kolekcije/index')
+const userRouter = require('./routes/users/index')
 
 // Config
 const app = express()
@@ -17,13 +19,13 @@ app.use((req, res, next) => {
   console.log(req.method, req.url)
   next()
 })
+mongoose.set('useCreateIndex', true) // https://mongoosejs.com/docs/deprecations.html#ensureindex
 
 // Routes
-app.use("/korisnici", userRouter)
-app.use("/kolekcija", colectionRouter)
-app.get("/", (req, res) => res.send("Dobrodosli na Spomenici-API!"))
+app.use('/korisnici', userRouter)
+app.use('/kolekcija', colectionRouter)
+app.get('/', (req, res) => res.send('Dobrodosli na Spomenici-API!'))
 
-// Server
-app.listen(port, () => {
-  console.log(`Server at ${domain}!`)
-})
+// Start
+mongoose.connect(URI, { useNewUrlParser: true })
+app.listen(port, () => console.log(`Server at ${domain}`))

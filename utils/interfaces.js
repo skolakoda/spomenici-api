@@ -8,14 +8,14 @@ class Response {
 class ErrRes extends Response {
   constructor(message, data) {
     super(message, data)
-    this.status = "error"
+    this.status = 'error'
   }
 }
 
 class SuccRes extends Response {
   constructor(message, data) {
     super(message, data)
-    this.status = "success"
+    this.status = 'success'
   }
 }
 

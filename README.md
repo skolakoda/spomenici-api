@@ -1,6 +1,6 @@
 # Spomenici API
 
-Javni API za pravljenje turističkih aplikacija (slanje, pretraga i brisanje lokacija).
+Javni API za pravljenje travel aplikacija (slanje, pretraga i brisanje lokacija).
 
 Vidi: https://spomenici-api.herokuapp.com/
 
@@ -8,44 +8,36 @@ Vidi: https://spomenici-api.herokuapp.com/
 
 ### Kolekcije
 
-- GET kolekcija/{naziv} (vraca sve spomenike)
-- GET kolekcija/{naziv}/nadji/id (vraca jedan spomenik)
-- GET kolekcija/{naziv}/kategorije (vraca sve kategorije po kolekciji)
-- POST kolekcija/{naziv}/dodaj (obavezna polja: naslov, kategorija, lat i lon, opciono: opis)
-- PUT kolekcija/{naziv}/uredi/id (obavezna polja: naslov, kategorija, lat i lon)
-- DELETE kolekcija/{naziv}/obrisi/id
+- GET /kolekcija/{naziv} (vraca sve spomenike)
+- GET /kolekcija/{naziv}/nadji/id (vraca jedan spomenik)
+- GET /kolekcija/{naziv}/kategorije (vraca sve kategorije po kolekciji)
+- POST /kolekcija/{naziv}/dodaj (obavezna polja: naslov, kategorija, lat i lon, opciono: opis)
+- PUT /kolekcija/{naziv}/uredi/id (obavezna polja: naslov, kategorija, lat i lon)
+- DELETE /kolekcija/{naziv}/obrisi/id
 
-API podrzava vise razlicitih kolekcija. Umesto kolekcija `naziv`, mozete uneti bilo koji naziv u rutama.
+Umesto varijable `naziv`, mozete uneti bilo koji naziv u rutama. Spomenici API podrzava vise razlicitih kolekcija, poput:
 
-### User
+- https://spomenici-api.herokuapp.com/kolekcija/novogroblje
+- https://spomenici-api.herokuapp.com/kolekcija/spomenici
+- https://spomenici-api.herokuapp.com/kolekcija/itfirme
+
+### Korisnici
 
 - POST /korisnici/registracija (obavezna polja: email, password i repeatPassword)
 - GET /korisnici/pokazi/id (vraca jednog korisnika)
 - GET /korisnici/login
 
-U headeru setovati polje auth sa vrednoscu "Bearer ${token}"
+Nakon uspesne prijave, za svaki naredni HTTP zahtev u headeru slati polje `auth` sa vrednoscu "Bearer ${token}"
 
-### JSON Response
+### Format odgovora
 
-Successful request:
-
-```
-{
-  "status": "success",
-  "data": {
-    /* Application-specific data would go here. */
-  },
-  "message": null /* Or optional success message */
-}
-```
-
-Failed request:
+Svaki odgovor servera ima standardan JSON format:
 
 ```
 {
-  "status": "error",
-  "data": null, /* or optional error payload */
-  "message": "Error xyz has occurred"
+  "status": "success", // ili "error"
+  "data": {}, // ili null
+  "message": "Info poruka" // ili null
 }
 ```
 
@@ -57,12 +49,12 @@ $ cd spomenici-api
 $ npm install
 ```
 
-Da bi aplikacija radila neophodno je napraviti `.env` fajl i dodati 4 variable:
+Da bi aplikacija radila neophodno je napraviti `.env` fajl i dodati sledece variable:
 
 - `DB_URI` sa linkom ka MongoDB bazi (ili trazite kredencijale ili otvorite svoju na lokalu)
 - `DB_NAME` ime postojece ili novokreirane baze
 - `NODE_ENV` sa vrednoscu "development"
-- `TOKEN_KLJUCH` sa vrednoscu iz heroku dashboard settings-a
+- `TOKEN_KLJUCH` iz heroku dashboard settings-a (ili bilo koji string za lokalni razvoj)
 
 Konacno, kad dodate varijable okruzenja, pokrenite:
 

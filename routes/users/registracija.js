@@ -1,19 +1,19 @@
-const { MongoClient } = require("mongodb")
-const md5 = require("md5")
+const { MongoClient } = require('mongodb')
+const md5 = require('md5')
 
-const { URI, DB_NAME } = require("../../config/setup")
-const { emailCheck } = require("../../utils/helpers")
-const { ErrRes, SuccRes } = require("../../utils/interfaces")
+const { URI, DB_NAME } = require('../../utils/config')
+const { emailCheck } = require('../../utils/helpers')
+const { ErrRes, SuccRes } = require('../../utils/interfaces')
 
 const registracija = (req, res) => {
   const { email, password, repeatPassword } = req.body
 
   if (!emailCheck(email)) {
-    return res.status(400).send(new ErrRes("Email nije validnog formata"))
+    return res.status(400).send(new ErrRes('Email nije validnog formata'))
   }
 
   if (password !== repeatPassword) {
-    return res.status(400).send(new ErrRes("Lozinke nisu identicne"))
+    return res.status(400).send(new ErrRes('Lozinke nisu identicne'))
   }
   const pass = md5(password)
 
@@ -22,11 +22,11 @@ const registracija = (req, res) => {
     const user = {
       email,
       pass,
-      role: "user"
+      role: 'user'
     }
 
     db.db(DB_NAME)
-      .collection("korisnici")
+      .collection('korisnici')
       .insertOne(user, err => {
         if (err) throw err
         res.send(

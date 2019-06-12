@@ -1,50 +1,29 @@
-const { MongoClient } = require("mongodb")
-const jwt = require("jsonwebtoken")
+const jwt = require('jsonwebtoken')
+const { model } = require('mongoose')
 
-const { URI, DB_NAME, tokenKey } = require("../../config/setup")
-const { nevalidnaLokacija } = require("../../utils/helpers")
-const { ErrRes, SuccRes } = require("../../utils/interfaces")
+const { tokenKey } = require('../../utils/config')
+const { ErrRes, SuccRes } = require('../../utils/interfaces')
+const SpomenikSchema = require('../../models/SpomenikSchema')
 
 const dodaj = (req, res) => {
+  // TODO: proveru tokena u midlver
   jwt.verify(req.token, tokenKey, err => {
-    if (err) {
-      return res.status(403).send(new ErrRes("Pogresan token"))
-    }
+    if (err) return res.status(403).send(new ErrRes('Pogresan token'))
+
     const { kolekcija } = req.params
-    const { naslov, kategorija, opis } = req.body
-    const lat = parseFloat(req.body.lat),
-      lon = parseFloat(req.body.lon)
+    const { naslov, kategorija, opis, lat, lon } = req.body
 
-    if (!naslov || !kategorija || !lat || !lon) {
-      return res.status(400).send(new ErrRes("Niste uneli sva potrebna polja"))
-    }
-
-    if (nevalidnaLokacija(lat, lon)) {
-      return res
-        .status(400)
-        .send(new ErrRes("Koordinate su izvan dozvoljenog geografskog opsega."))
-    }
-
-    MongoClient.connect(URI, { useNewUrlParser: true }, (err, db) => {
-      if (err) throw err
-
-      const model = {
-        naslov,
-        kategorija,
-        lokacija: { lat, lon },
-        opis
-      }
-
-      db.db(DB_NAME)
-        .collection(kolekcija)
-        .insertOne(model, (err, inserted) => {
-          if (err) throw err
-          res.json(
-            new SuccRes("Nova lokacija je uspesno dodata.", inserted.ops[0])
-          )
-        })
-      db.close()
+    const Spomenik = model('Spomenik', SpomenikSchema, kolekcija)
+    const spomenik = new Spomenik({
+      naslov,
+      opis,
+      kategorija,
+      lokacija: { lat, lon }
     })
+  
+    spomenik.save()
+      .then(data => res.json(new SuccRes('Nova lokacija je uspesno dodata.', data)))
+      .catch(err => res.status(400).send(err.message))
   })
 }
 

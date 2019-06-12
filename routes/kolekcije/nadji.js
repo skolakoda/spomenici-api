@@ -1,26 +1,17 @@
-const { MongoClient, ObjectID } = require("mongodb")
+const { ObjectID } = require('mongodb')
+const { model } = require('mongoose')
 
-const { URI, DB_NAME } = require("../../config/setup")
-const { ErrRes, SuccRes } = require("../../utils/interfaces")
+const { ErrRes, SuccRes } = require('../../utils/interfaces')
+const SpomenikSchema = require('../../models/SpomenikSchema')
 
-const nadji = (req, res) => {
+const nadji = async(req, res) => {
   const { kolekcija, id } = req.params
+  if (!ObjectID.isValid(id))
+    return res.status(400).json(new ErrRes('Nije validan id.'))
 
-  MongoClient.connect(URI, { useNewUrlParser: true }, (err, db) => {
-    if (err) throw err
-
-    if (!ObjectID.isValid(id))
-      return res.status(400).json(new ErrRes("Nije validan id."))
-
-    db.db(DB_NAME)
-      .collection(kolekcija)
-      .findOne({ _id: ObjectID(id) }, (err, spomenik) => {
-        if (err) console.log(err)
-        res.send(new SuccRes(null, spomenik))
-      })
-
-    db.close()
-  })
+  const Spomenik = model('Spomenik', SpomenikSchema, kolekcija)
+  const spomenik = await Spomenik.findOne({ _id: ObjectID(id) })
+  res.send(new SuccRes(null, spomenik))
 }
 
 module.exports = nadji

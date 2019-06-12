@@ -4,9 +4,9 @@ const DB_NAME = process.env.DB_NAME
 const tokenKey = process.env.TOKEN_KLJUCH
 
 const domain =
-  process.env.NODE_ENV === "development"
+  process.env.NODE_ENV === 'development'
     ? `http://localhost:${port}`
-    : "https://spomenici-api.herokuapp.com/"
+    : 'https://spomenici-api.herokuapp.com/'
 
 module.exports = {
   port,
