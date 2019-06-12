@@ -1,23 +1,28 @@
 const { MongoClient, ObjectID } = require('mongodb')
+const jwt = require('jsonwebtoken')
 
-const { URI, DB_NAME } = require('../../utils/config')
+const { URI, DB_NAME, tokenKey } = require('../../utils/config')
 const { ErrRes, SuccRes } = require('../../utils/interfaces')
 
 const about = (req, res) => {
-  const { id } = req.params
+  jwt.verify(req.token, tokenKey, err => {
+    if (err) return res.status(403).send(new ErrRes('Pogresan token'))
 
-  MongoClient.connect(URI, { useNewUrlParser: true }, (err, db) => {
-    if (err) throw err
-    if (!ObjectID.isValid(id))
-      return res.status(400).send(new ErrRes('Nije validan id.'))
+    const { id } = req.params
 
-    db.db(DB_NAME)
-      .collection('korisnici')
-      .findOne({ _id: ObjectID(id) }, (err, user) => {
-        if (err) throw err
-        res.send(new SuccRes(`Pozdrav ${user.email}!. Tvoj ID => ${user._id}`)) // trenutno samo
-      })
-    db.close()
+    MongoClient.connect(URI, { useNewUrlParser: true }, (err, db) => {
+      if (err) throw err
+      if (!ObjectID.isValid(id))
+        return res.status(400).send(new ErrRes('Nije validan id.'))
+
+      db.db(DB_NAME)
+        .collection('korisnici')
+        .findOne({ _id: ObjectID(id) }, (err, user) => {
+          if (err) throw err
+          res.send(new SuccRes(`Pozdrav ${user.email}!. Tvoj ID => ${user._id}`))
+        })
+      db.close()
+    })
   })
 }
 

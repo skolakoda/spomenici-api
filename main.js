@@ -28,4 +28,4 @@ app.get('/', (req, res) => res.send('Dobrodosli na Spomenici-API!'))
 
 // Start
 mongoose.connect(URI, { useNewUrlParser: true })
-app.listen(port, () => console.log(`Server at ${domain}!`))
+app.listen(port, () => console.log(`Server at ${domain}`))

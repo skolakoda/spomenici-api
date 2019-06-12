@@ -8,7 +8,7 @@ const { ErrRes, SuccRes } = require('../../utils/interfaces')
 
 const obrisi = async(req, res) => {
   jwt.verify(req.token, tokenKey, async err => {
-    if (err) return res.status(403).send(new ErrRes('Nevalidan token'))
+    if (err) return res.status(403).send(new ErrRes('Pogresan token'))
 
     const { kolekcija, id } = req.params
     if (!ObjectID.isValid(id)) {

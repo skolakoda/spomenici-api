@@ -8,7 +8,7 @@ const SpomenikSchema = require('../../models/SpomenikSchema')
 const dodaj = (req, res) => {
   // TODO: proveru tokena u midlver
   jwt.verify(req.token, tokenKey, err => {
-    if (err) return res.status(403).send(new ErrRes('Nevalidan token'))
+    if (err) return res.status(403).send(new ErrRes('Pogresan token'))
 
     const { kolekcija } = req.params
     const { naslov, kategorija, opis, lat, lon } = req.body
