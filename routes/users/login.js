@@ -3,7 +3,7 @@ const md5 = require("md5")
 const jwt = require("jsonwebtoken")
 
 const { URI, DB_NAME, tokenKey } = require("../../config/setup")
-const { ErrRes } = require("../../utils/interfaces")
+const { ErrRes, SuccRes } = require("../../utils/interfaces")
 
 const login = (req, res) => {
   const { email, password } = req.body
@@ -17,7 +17,7 @@ const login = (req, res) => {
           return res.status(400).send(new ErrRes("Pogresan email ili password"))
         }
         const token = jwt.sign({ user }, tokenKey, { expiresIn: "30d" })
-        res.json({ message: "Success! Token sent", token })
+        res.json(new SuccRes("Success! Token sent", token))
         const date = Date()
         const tokenModel = {
           userId: user._id,

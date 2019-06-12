@@ -7,11 +7,7 @@ const { ErrRes, SuccRes } = require("../../utils/interfaces")
 const obrisi = (req, res) => {
   jwt.verify(req.token, tokenKey, err => {
     if (err) {
-      return res
-        .status(403)
-        .send(
-          new ErrRes("Samo admin moze obrisati lokaciju ili pogresan token")
-        )
+      return res.status(403).send(new ErrRes("Pogresan token"))
     }
     const { kolekcija, id } = req.params
 

@@ -8,13 +8,7 @@ const { ErrRes, SuccRes } = require("../../utils/interfaces")
 const dodaj = (req, res) => {
   jwt.verify(req.token, tokenKey, err => {
     if (err) {
-      return res
-        .status(403)
-        .send(
-          new ErrRes(
-            "Samo ulogovani korisnik moze editovati lokaciju ili pogresan token"
-          )
-        )
+      return res.status(403).send(new ErrRes("Pogresan token"))
     }
     const { kolekcija } = req.params
     const { naslov, kategorija, opis } = req.body
