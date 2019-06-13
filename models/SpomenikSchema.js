@@ -5,16 +5,20 @@ const SpomenikSchema = new mongoose.Schema({
   naslov:	{
     type: String,
     trim: true,
+    minlength: 3,
+    maxlength: 64,
     unique : true,
     required: true
   },
   opis:	{
     type: String,
+    maxlength: 256,
     trim: true,
   },
   kategorija:	{
     type: String,
     trim: true,
+    lowercase: true,
     required: true
   },
   lokacija: {
