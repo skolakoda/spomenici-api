@@ -18,6 +18,7 @@ const SpomenikSchema = new mongoose.Schema({
   kategorija:	{
     type: String,
     trim: true,
+    lowercase: true,
     required: true
   },
   lokacija: {
