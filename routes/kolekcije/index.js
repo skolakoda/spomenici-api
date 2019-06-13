@@ -12,8 +12,9 @@ const kategorije = require('./kategorije')
 router.get('/:kolekcija', izlistaj)
 router.get('/:kolekcija/kategorije', kategorije)
 router.get('/:kolekcija/nadji/:id', nadji)
-router.post('/:kolekcija/dodaj', tokenCheck, dodaj)
-router.put('/:kolekcija/uredi/:id', tokenCheck, uredi)
-router.delete('/:kolekcija/obrisi/:id', tokenCheck, obrisi)
+// router.use(tokenCheck)
+router.post('/:kolekcija/dodaj', dodaj)
+router.put('/:kolekcija/uredi/:id', uredi)
+router.delete('/:kolekcija/obrisi/:id', obrisi)
 
 module.exports = router

@@ -1,5 +1,4 @@
 const { model } = require('mongoose')
-const { ObjectID } = require('mongodb')
 const jwt = require('jsonwebtoken')
 
 const { tokenKey } = require('../../utils/config')
@@ -13,11 +12,8 @@ const uredi = async(req, res) => {
     const { kolekcija, id } = req.params
     const { naslov, kategorija, opis, lat, lon } = req.body
 
-    if (!ObjectID.isValid(id))
-      return res.status(400).send(new ErrRes('Nije validan id.'))
-
     const Spomenik = model('Spomenik', SpomenikSchema, kolekcija)
-    const spomenik = await Spomenik.findOne({ _id: ObjectID(id) })
+    const spomenik = await Spomenik.findOne({ _id: id })
 
     if (naslov) spomenik.naslov = naslov
     if (kategorija) spomenik.kategorija = kategorija
@@ -27,7 +23,6 @@ const uredi = async(req, res) => {
     spomenik.save()
       .then(data => res.json(new SuccRes('Lokacija je uspesno azurirana.', data)))
       .catch(err => res.status(400).send(`Greska : ${err.message}`))
-
   })
 }
 

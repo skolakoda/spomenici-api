@@ -12,7 +12,7 @@ Vidi: https://spomenici-api.herokuapp.com/
 - GET /kolekcija/{naziv}/nadji/id (vraca jedan spomenik)
 - GET /kolekcija/{naziv}/kategorije (vraca sve kategorije po kolekciji)
 - POST /kolekcija/{naziv}/dodaj (obavezna polja: naslov, kategorija, lat i lon, opciono: opis)
-- PUT /kolekcija/{naziv}/uredi/id (obavezna polja: naslov, kategorija, lat i lon)
+- PUT /kolekcija/{naziv}/uredi/id (opciono se azurira bilo koje polje)
 - DELETE /kolekcija/{naziv}/obrisi/id
 
 Umesto varijable `naziv`, mozete uneti bilo koji naziv u rutama. Spomenici API podrzava vise razlicitih kolekcija, poput:
