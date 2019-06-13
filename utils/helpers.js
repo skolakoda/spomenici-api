@@ -1,3 +1,8 @@
+const jwt = require('jsonwebtoken')
+
+const { tokenKey } = require('./config')
+const { ErrRes } = require('./interfaces')
+
 const nevalidnaLokacija = (lat, lon) =>
   lat > 47.2 || lat < 42 || lon > 23 || lon < 19
 
@@ -16,6 +21,11 @@ const tokenCheck = (req, res, next) => {
   } else {
     res.sendStatus(403)
   }
+  jwt.verify(req.token, tokenKey, err => {
+    if (err) {
+      return res.status(403).send(new ErrRes('Pogresan token'))
+    }
+  })
 }
 
 module.exports = {

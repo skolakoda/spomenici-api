@@ -1,29 +1,15 @@
-const { MongoClient, ObjectID } = require('mongodb')
-const jwt = require('jsonwebtoken')
+const { model } = require('mongoose')
 
-const { URI, DB_NAME, tokenKey } = require('../../utils/config')
 const { ErrRes, SuccRes } = require('../../utils/interfaces')
+const UserSchema = require('../../models/UserSchema')
 
 const about = (req, res) => {
-  jwt.verify(req.token, tokenKey, err => {
-    if (err) return res.status(403).send(new ErrRes('Pogresan token'))
+  const { id } = req.params
 
-    const { id } = req.params
-
-    MongoClient.connect(URI, { useNewUrlParser: true }, (err, db) => {
-      if (err) throw err
-      if (!ObjectID.isValid(id))
-        return res.status(400).send(new ErrRes('Nije validan id.'))
-
-      db.db(DB_NAME)
-        .collection('korisnici')
-        .findOne({ _id: ObjectID(id) }, (err, user) => {
-          if (err) throw err
-          res.send(new SuccRes(`Pozdrav ${user.email}!. Tvoj ID => ${user._id}`))
-        })
-      db.close()
-    })
-  })
+  const User = model('Korisnik', UserSchema, 'korisnici')
+  User.findOne({ _id: id })
+    .then(user => res.send(new SuccRes(null, user)))
+    .catch(err => res.status(400).send(new ErrRes(err.message)))
 }
 
 module.exports = about
