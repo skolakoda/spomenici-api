@@ -2,6 +2,7 @@ require('dotenv').config()
 const express = require('express')
 const cors = require('cors')
 const bodyParser = require('body-parser')
+const fileUpload = require('express-fileupload');
 const mongoose = require('mongoose')
 
 const { port, domain, URI } = require('./utils/config')
@@ -14,6 +15,7 @@ const app = express()
 app.use(cors())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
+app.use(fileUpload())
 // TODO: odvojiti logger u helpers i dodati ga samo kad je development
 app.use((req, res, next) => {
   console.log(req.method, req.url)
