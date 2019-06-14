@@ -11,7 +11,6 @@ const emailCheck = email => {
   return regex.test(email)
 }
 
-// prebacuje token iz headera u req?
 const tokenCheck = (req, res, next) => {
   const auth = req.headers['auth']
   if (typeof auth !== 'undefined') {
