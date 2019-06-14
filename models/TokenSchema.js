@@ -9,7 +9,7 @@ const TokenSchema = new mongoose.Schema({
     required: true
   },
   dodat: {
-    type: Number,
+    type: String,
     required: true
   },
   userid: {
