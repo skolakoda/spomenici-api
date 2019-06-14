@@ -2,20 +2,20 @@ const mongoose = require('mongoose')
 const uniqueValidator = require('mongoose-unique-validator')
 
 const SpomenikSchema = new mongoose.Schema({
-  naslov:	{
+  naslov: {
     type: String,
     trim: true,
     minlength: 3,
     maxlength: 64,
-    unique : true,
+    unique: true,
     required: true
   },
-  opis:	{
+  opis: {
     type: String,
     maxlength: 256,
     trim: true,
   },
-  kategorija:	{
+  kategorija: {
     type: String,
     trim: true,
     lowercase: true,
@@ -34,7 +34,8 @@ const SpomenikSchema = new mongoose.Schema({
       max: 180,
       required: true
     }
-  }
+  },
+  slika: String
 })
 
 SpomenikSchema.plugin(uniqueValidator) // mora da bi radilo unique

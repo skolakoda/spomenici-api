@@ -14,7 +14,7 @@ router.get('/:kolekcija/kategorije', kategorije)
 router.get('/:kolekcija/nadji/:id', nadji)
 router.use(tokenCheck)
 router.post('/:kolekcija/dodaj', dodaj)
-router.put('/:kolekcija/uredi/:id', uredi)
+router.post('/:kolekcija/uredi/:id', uredi)
 router.delete('/:kolekcija/obrisi/:id', obrisi)
 
 module.exports = router
