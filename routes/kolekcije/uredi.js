@@ -8,10 +8,10 @@ const uredi = async(req, res) => {
 
   const { kolekcija, id } = req.params
   const { naslov, kategorija, opis, lat, lon } = req.body
-  const { slika } = req.files
 
   let slikaString = ''
-  if (slika) {
+  if (req.files) {
+    const { slika } = req.files
     const data = await sharp(slika.data)
       .resize(280)
       .toBuffer()
