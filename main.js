@@ -2,7 +2,7 @@ require('dotenv').config()
 const express = require('express')
 const cors = require('cors')
 const bodyParser = require('body-parser')
-const fileUpload = require('express-fileupload');
+const fileUpload = require('express-fileupload')
 const mongoose = require('mongoose')
 
 const { port, domain, URI } = require('./utils/config')
