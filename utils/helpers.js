@@ -1,7 +1,7 @@
-const jwt = require("jsonwebtoken")
+const jwt = require('jsonwebtoken')
 
-const { tokenKey } = require("./config")
-const { ErrRes } = require("./interfaces")
+const { tokenKey } = require('./config')
+const { ErrRes } = require('./interfaces')
 
 const nevalidnaLokacija = (lat, lon) =>
   lat > 47.2 || lat < 42 || lon > 23 || lon < 19
@@ -13,14 +13,14 @@ const emailCheck = email => {
 
 // prebacuje token iz headera u req?
 const tokenCheck = (req, res, next) => {
-  const auth = req.headers["auth"]
-  if (typeof auth !== "undefined") {
-    const token = auth.split(" ")[1]
+  const auth = req.headers['auth']
+  if (typeof auth !== 'undefined') {
+    const token = auth.split(' ')[1]
     if (jwt.verify(token, tokenKey)) {
       next()
     }
   } else {
-    return res.status(403).send(new ErrRes("Pogresan token"))
+    return res.status(403).send(new ErrRes('Pogresan token'))
   }
 }
 
