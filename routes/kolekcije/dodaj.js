@@ -4,18 +4,19 @@ const sharp = require('sharp')
 const { ErrRes, SuccRes } = require('../../utils/interfaces')
 const SpomenikSchema = require('../../models/SpomenikSchema')
 
-const dodaj = async (req, res) => {
+const dodaj = async(req, res) => {
 
   const { kolekcija } = req.params
   const { naslov, kategorija, opis, lat, lon } = req.body
   const { slika } = req.files
 
-  const data = await sharp(slika.data)
-    .resize(280)
-    .toBuffer()
-  const slikaString = data.toString('base64')
-
-
+  let slikaString = ''
+  if (slika) {
+    const data = await sharp(slika.data)
+      .resize(280)
+      .toBuffer()
+    slikaString = data.toString('base64')
+  }
 
   const Spomenik = model('Spomenik', SpomenikSchema, kolekcija)
   const spomenik = new Spomenik({
@@ -23,7 +24,7 @@ const dodaj = async (req, res) => {
     opis,
     kategorija,
     lokacija: { lat, lon },
-    slikaString
+    slika: slikaString
   })
 
   spomenik.save()

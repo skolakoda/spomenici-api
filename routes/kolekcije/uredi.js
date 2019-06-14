@@ -4,17 +4,19 @@ const sharp = require('sharp')
 const { ErrRes, SuccRes } = require('../../utils/interfaces')
 const SpomenikSchema = require('../../models/SpomenikSchema')
 
-const uredi = async (req, res) => {
+const uredi = async(req, res) => {
 
   const { kolekcija, id } = req.params
   const { naslov, kategorija, opis, lat, lon } = req.body
   const { slika } = req.files
 
-  const data = await sharp(slika.data)
-    .resize(280)
-    .toBuffer()
-  const slikaString = data.toString('base64')
-
+  let slikaString = ''
+  if (slika) {
+    const data = await sharp(slika.data)
+      .resize(280)
+      .toBuffer()
+    slikaString = data.toString('base64')
+  }
 
   const Spomenik = model('Spomenik', SpomenikSchema, kolekcija)
   const spomenik = await Spomenik.findOne({ _id: id })
