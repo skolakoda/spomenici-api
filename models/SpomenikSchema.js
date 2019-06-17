@@ -35,7 +35,23 @@ const SpomenikSchema = new mongoose.Schema({
       required: true
     }
   },
-  slika: String
+  slika: String,
+  site: {
+    type: String,
+    match: /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/gm
+  },
+  radnoVreme: {
+    od: {
+      type: Number,
+      min: 0,
+      max: 24
+    },
+    do: {
+      type: Number,
+      min: 0,
+      max: 24
+    }
+  }
 })
 
 SpomenikSchema.plugin(uniqueValidator) // mora da bi radilo unique
