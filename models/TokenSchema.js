@@ -12,7 +12,7 @@ const TokenSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  userid: {
+  userId: {
     type: String,
     required: true
   }
