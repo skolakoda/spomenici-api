@@ -20,7 +20,7 @@ const UserSchema = new mongoose.Schema({
   },
   datumRodjenja: {
     type: Number,
-    default: Date.now()
+    default: Date.now() // why ??
   },
   role: {
     type: String,

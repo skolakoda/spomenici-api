@@ -1,17 +1,14 @@
-const { model } = require('mongoose')
 const md5 = require('md5')
 
 const { ErrRes, SuccRes } = require('../../utils/interfaces')
-const UserSchema = require('../../models/UserSchema')
+const User = require('../../models/User')
 
 const registracija = (req, res) => {
   const { email, password, repeatPassword } = req.body
-
   if (password !== repeatPassword) {
     return res.status(400).send(new ErrRes('Lozinke nisu identicne'))
   }
   const pass = md5(password)
-  const User = model('Korisnik', UserSchema, 'korisnici')
   const user = new User({
     email,
     pass
