@@ -4,13 +4,12 @@ const jwt = require('jsonwebtoken')
 
 const { tokenKey } = require('../../utils/config')
 const { SuccRes } = require('../../utils/interfaces')
-const UserSchema = require('../../models/UserSchema')
+const User = require('../../models/User')
 const TokenSchema = require('../../models/TokenSchema')
 
 const login = (req, res) => {
   const { email, password } = req.body
   const pw = md5(password)
-  const User = model('Korisnik', UserSchema, 'korisnici')
   User.findOne({ email, password: pw }).then(user => {
     const token = jwt.sign({ user }, tokenKey, { expiresIn: '30d' })
     res.json(new SuccRes('Success! Token sent', token))
