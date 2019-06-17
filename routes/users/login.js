@@ -1,24 +1,21 @@
-const { model } = require('mongoose')
 const md5 = require('md5')
 const jwt = require('jsonwebtoken')
 
 const { tokenKey } = require('../../utils/config')
 const { SuccRes } = require('../../utils/interfaces')
 const User = require('../../models/User')
-const TokenSchema = require('../../models/TokenSchema')
+const Token = require('../../models/Token')
 
 const login = (req, res) => {
   const { email, password } = req.body
-  const pw = md5(password)
-  User.findOne({ email, password: pw }).then(user => {
+
+  User.findOne({ email, password: md5(password) }).then(user => {
     const token = jwt.sign({ user }, tokenKey, { expiresIn: '30d' })
     res.json(new SuccRes('Success! Token sent', token))
-    const date = Date()
-    const Token = model('Token', TokenSchema, 'tokens')
     const tokenModel = new Token({
       userId: user._id,
       token,
-      dodat: date.toString()
+      dodat: Date().toString()
     })
 
     tokenModel
