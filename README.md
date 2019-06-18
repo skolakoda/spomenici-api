@@ -6,22 +6,19 @@ Vidi: https://spomenici-api.herokuapp.com/
 
 ## API Dokumentacija
 
-### Kolekcije
+### Kolekcije objekata
 
-- GET /kolekcija/{naziv} (vraca sve spomenike)
+- GET /kolekcija/{naziv} (vraca sve objekte)
+
+Umesto varijable `naziv`, mozete uneti bilo koju postojecu kolekciju, npr: [/kolekcija/itfirme](https://spomenici-api.herokuapp.com/kolekcija/itfirme)
+
 - GET /kolekcija/{naziv}/nadji/{id} (vraca jedan spomenik)
 - GET /kolekcija/{naziv}/kategorije (vraca sve kategorije po kolekciji)
 - POST /kolekcija/{naziv}/dodaj (obavezna polja: naslov, kategorija, lat i lon, opciono: opis, slika)
 - PUT /kolekcija/{naziv}/uredi/{id} (opciono se azurira bilo koje polje)
 - DELETE /kolekcija/{naziv}/obrisi/{id}
 
-Slika se salje kao fajl, a server je vraca kao [base64](https://stackoverflow.com/questions/8499633/how-to-display-base64-images-in-html) string format.
-
-Umesto varijable `naziv`, mozete uneti bilo koji naziv u rutama. Spomenici API podrzava vise razlicitih kolekcija, poput:
-
-- https://spomenici-api.herokuapp.com/kolekcija/novogroblje
-- https://spomenici-api.herokuapp.com/kolekcija/spomenici
-- https://spomenici-api.herokuapp.com/kolekcija/itfirme
+Slika se salje kao fajl, a server je sluzi kao [base64](https://stackoverflow.com/questions/8499633/how-to-display-base64-images-in-html) string. U HTML-u se prikazuje na sledeci nacin: `<img src="data:image/png;base64, ${slika}" />`
 
 ### Korisnici
 
