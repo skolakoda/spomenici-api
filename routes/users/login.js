@@ -15,7 +15,7 @@ const login = (req, res) => {
     const tokenModel = new Token({
       userId: user._id,
       token,
-      dodat: Date().toString()
+      dodat: Date.now()
     })
 
     tokenModel
