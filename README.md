@@ -25,7 +25,7 @@ Slika se salje kao fajl, a server je sluzi kao [base64](https://stackoverflow.co
 - POST /korisnici/registracija (obavezna polja: email, password i repeatPassword)
 - GET /korisnici/pokazi/{id} (vraca jednog korisnika)
 - GET /korisnici/login
-- PUT /korisnici/uredi/{id} (opciono se azurira bilo koje polje)
+- PUT /korisnici/uredi/{id} (opciono se azurira bilo koje polje). Da bi se promenio password, treba popuniti polja password i repeatPass
 
 Nakon uspesne prijave, za svaki naredni HTTP zahtev u headeru slati polje `auth` sa vrednoscu "Bearer ${token}"
 
