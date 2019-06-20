@@ -5,17 +5,15 @@ const email = (req, res) => {
   const {email} = req.body
   const trialPass = Math.random(Math.floor() * 100000)
   const transporter = nodeMailer.createTransport({
-    host: 'smtp.zoho.com',
-    port: 465,
-    secure: true,
+    service: 'gmail',
     auth: {
-      user: '', // email
-      pass: ''
+      user: 'spomeniciskolakoda@gmail.com', // email
+      pass: 'Skolakoda1!'
     }
   })
 
   const mailOptions = {
-    from: '<Nas E-mail>',
+    from: 'spomeniciskolakoda@gmail.com',
     to: email,
     subject: 'Promena sifre!',
     text: `Vasa trenutna sifra je ${trialPass.toString()}. Molimo promenite je na sajtu!`
@@ -25,7 +23,7 @@ const email = (req, res) => {
     if (err) {
       res.status(400).send(new ErrRes(err.message))
     } else {
-      res.status(200).send(new SuccRes(null, info));
+      res.status(200).send(new SuccRes(`Email je poslat! ${info.response}`));
     }
 })
 }
