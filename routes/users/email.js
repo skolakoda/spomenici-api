@@ -8,7 +8,7 @@ const User = require('../../models/User')
 const email = (req, res) => {
   const {email} = req.body
   
-  User.findOne({ email }).then(user =>{
+  User.findOne({ email }).then(user => {
     if (!user) {
       return res.send(new ErrRes('Email se ne nalazi u bazi korisnika'))
     }
@@ -32,7 +32,7 @@ const email = (req, res) => {
       if (err) {
         res.status(400).send(new ErrRes(err.message + ' Ne radi'))
       } else {
-        res.status(200).send(new SuccRes(`Email je poslat! ${info.response}`));
+        res.status(200).send(new SuccRes(`Email je poslat! ${info.response}`))
       }
     })
 
