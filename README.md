@@ -22,10 +22,11 @@ Slika se salje kao fajl, a server je sluzi kao [base64](https://stackoverflow.co
 
 ### Korisnici
 
-- POST /korisnici/registracija (obavezna polja: email, password i repeatPassword)
-- GET /korisnici/pokazi/{id} (vraca jednog korisnika)
-- GET /korisnici/login
-- PUT /korisnici/uredi/{id} (opciono se azurira bilo koje polje). Da bi se promenio password, treba popuniti polja password i repeatPass
+- POST /korisnici/registracija (obavezna polja: email, pass i repeatPass)
+- GET /korisnici/pokazi/id (vraca jednog korisnika)
+- POST /korisnici/login
+- PUT /korisnici/uredi/id (opciono se azurira bilo koje polje)
+- GET /korisnici/email (obavezno polje email)
 
 Nakon uspesne prijave, za svaki naredni HTTP zahtev u headeru slati polje `auth` sa vrednoscu "Bearer ${token}"
 
