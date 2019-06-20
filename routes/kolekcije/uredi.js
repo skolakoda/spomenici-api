@@ -4,10 +4,10 @@ const sharp = require('sharp')
 const { ErrRes, SuccRes } = require('../../utils/interfaces')
 const SpomenikSchema = require('../../models/SpomenikSchema')
 
-const uredi = async(req, res) => {
+const uredi = async (req, res) => {
 
   const { kolekcija, id } = req.params
-  const { naslov, kategorija, opis, lat, lon } = req.body
+  const { naslov, kategorija, opis, lat, lon, website, od } = req.body
 
   let slikaString = ''
   if (req.files) {
@@ -26,6 +26,8 @@ const uredi = async(req, res) => {
   if (opis) spomenik.opis = opis
   if (lat && lon) spomenik.lokacija = { lat, lon }
   if (slikaString) spomenik.slika = slikaString
+  if (website) spomenik.website = website
+  if (od && req.body.do) spomenik.radnoVreme = { od, do: req.body.do }
 
   spomenik.save()
     .then(data => res.json(new SuccRes('Lokacija je uspesno azurirana.', data)))

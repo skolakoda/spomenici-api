@@ -4,10 +4,10 @@ const sharp = require('sharp')
 const { ErrRes, SuccRes } = require('../../utils/interfaces')
 const SpomenikSchema = require('../../models/SpomenikSchema')
 
-const dodaj = async(req, res) => {
+const dodaj = async (req, res) => {
 
   const { kolekcija } = req.params
-  const { naslov, kategorija, opis, lat, lon } = req.body
+  const { naslov, kategorija, opis, lat, lon, website, od } = req.body
 
   let slikaString = ''
   if (req.files) {
@@ -23,8 +23,10 @@ const dodaj = async(req, res) => {
     naslov,
     opis,
     kategorija,
+    website,
+    slika: slikaString,
     lokacija: { lat, lon },
-    slika: slikaString
+    radnoVreme: { od, do: req.body.do }
   })
 
   spomenik.save()
