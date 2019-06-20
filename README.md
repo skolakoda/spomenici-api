@@ -25,10 +25,11 @@ Umesto varijable `naziv`, mozete uneti bilo koji naziv u rutama. Spomenici API p
 
 ### Korisnici
 
-- POST /korisnici/registracija (obavezna polja: email, password i repeatPassword)
+- POST /korisnici/registracija (obavezna polja: email, pass i repeatPass)
 - GET /korisnici/pokazi/id (vraca jednog korisnika)
 - POST /korisnici/login
 - PUT /korisnici/uredi/id (opciono se azurira bilo koje polje)
+- GET /korisnici/email (obavezno polje email)
 
 Nakon uspesne prijave, za svaki naredni HTTP zahtev u headeru slati polje `auth` sa vrednoscu "Bearer ${token}"
 
