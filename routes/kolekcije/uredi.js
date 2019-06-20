@@ -4,7 +4,7 @@ const sharp = require('sharp')
 const { ErrRes, SuccRes } = require('../../utils/interfaces')
 const SpomenikSchema = require('../../models/SpomenikSchema')
 
-const uredi = async (req, res) => {
+const uredi = async(req, res) => {
 
   const { kolekcija, id } = req.params
   const { naslov, kategorija, opis, lat, lon, website, od } = req.body
