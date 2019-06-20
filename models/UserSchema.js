@@ -6,13 +6,11 @@ const UserSchema = new mongoose.Schema({
     type: String,
     trim: true,
     unique: true,
-    required: true,
-    match: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+    required: true
   },
   password: {
     type: String,
-    minlength: 6,
-    match: /^(?=.{6,}$)(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W).*$/
+    minlength: 6
   },
   ime: {
     type: String,

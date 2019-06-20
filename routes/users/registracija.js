@@ -4,20 +4,21 @@ const { ErrRes, SuccRes } = require('../../utils/interfaces')
 const User = require('../../models/User')
 
 const registracija = (req, res) => {
-  const { email, password, repeatPassword } = req.body
-  if (password !== repeatPassword) {
-    return res.status(400).send(new ErrRes('Lozinke nisu identicne'))
+  const { email, pass, repeatPass } = req.body
+  if (pass !== repeatPass || pass.length < 6 || repeatPass.length < 6) {
+    return res.status(400).send(new ErrRes('Lozinke nisu identicne ili su krace od 6 karaktera'))
   }
-  const pass = md5(password)
+  const password = md5(pass)
+  
   const user = new User({
     email,
-    pass
+    password
   })
 
   user
     .save()
     .then(data =>
-      res.json(new SuccRes('Uspesno ste registrovani ->', data.email))
+      res.json(new SuccRes('Uspesno ste registrovani ->', data.password))
     )
     .catch(err => res.status(400).send(err.message))
 }
