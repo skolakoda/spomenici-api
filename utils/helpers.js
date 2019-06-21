@@ -24,7 +24,7 @@ const tokenCheck = (req, res, next) => {
   }
 }
 
-const sendEmail = (email) => {
+const sendEmail = (req, res, email) => {
       const transporter = nodeMailer.createTransport({
       service: 'Gmail',
       auth: {
@@ -32,7 +32,8 @@ const sendEmail = (email) => {
         pass: `${emailPass}`
       }
     })
-  
+    const trialPass = `${Math.floor(Math.random() * 10000000)}`
+    
     const mailOptions = {
       from: 'spomeniciskolakoda@gmail.com',
       to: email,
@@ -47,7 +48,7 @@ const sendEmail = (email) => {
         res.status(200).send(new SuccRes(`Email je poslat! ${info.response}`))
       }
     })
-
+    return trialPass
 }
 
 module.exports = {
