@@ -16,7 +16,7 @@ const email = (req, res) => {
     const transporter = nodeMailer.createTransport({
       service: 'Gmail',
       auth: {
-        user: 'spomeniciskolakoda@gmail.com', // email
+        user: 'spomeniciskolakoda@gmail.com',
         pass: `${emailPass}`
       }
     })
@@ -30,7 +30,7 @@ const email = (req, res) => {
   
     transporter.sendMail(mailOptions, (err, info) => {
       if (err) {
-        res.status(400).send(new ErrRes(err.message + ' Ne radi'))
+        res.status(400).send(new ErrRes(err.message))
       } else {
         res.status(200).send(new SuccRes(`Email je poslat! ${info.response}`))
       }
@@ -40,7 +40,7 @@ const email = (req, res) => {
     user.password = password
 
     user.save()
-      .then(data => res.json(new SuccRes('Trenutna sifra upisana u bazu za korisnika: ' + data.email)))
+      .then(data => res.json(new SuccRes(`Trenutna sifra upisana u bazu za korisnika: ${data.email}`)))
       .catch(err => res.status(400).send(`Greska : ${new ErrRes(err.message)}`))
   })
 
