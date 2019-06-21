@@ -1,7 +1,6 @@
 const md5 = require('md5')
 
 const { ErrRes, SuccRes } = require('../../utils/interfaces')
-const { emailPass } = require('../../utils/config')
 const { sendEmail } = require('../../utils/helpers')
 const User = require('../../models/User')
 
