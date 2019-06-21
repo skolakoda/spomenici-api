@@ -13,9 +13,7 @@ const email = (req, res) => {
       return res.send(new ErrRes('Email se ne nalazi u bazi korisnika'))
     }
     
-    const trialPass = `${Math.floor(Math.random() * 10000000)}`
-    
-    sendEmail(email)
+    const trialPass = sendEmail(email)
 
     const password = md5(trialPass)
     user.password = password
