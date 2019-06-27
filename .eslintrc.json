@@ -18,7 +18,7 @@
     "no-unreachable": "error",
     "curly": ["warn", "multi"],
     "dot-notation": "warn",
-    "no-else-return": "warn",
+    "no-else-return": "error",
     "no-global-assign": "error",
     "no-invalid-this": "error",
     "block-scoped-var": "error",
