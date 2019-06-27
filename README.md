@@ -8,17 +8,49 @@ Vidi: https://spomenici-api.herokuapp.com/
 
 ### Kolekcije objekata
 
-- GET /kolekcija/{naziv} (vraca sve objekte)
+#### GET /kolekcija/{naziv}
 
-Umesto varijable `naziv`, mozete uneti bilo koju postojecu kolekciju, npr: [/kolekcija/itfirme](https://spomenici-api.herokuapp.com/kolekcija/itfirme)
+Vraca sve objekte. Umesto varijable `naziv`, mozete uneti bilo koju postojecu kolekciju, npr:
+- [/kolekcija/itfirme](https://spomenici-api.herokuapp.com/kolekcija/itfirme)
+- [/kolekcija/toilets](https://spomenici-api.herokuapp.com/kolekcija/toilets)
 
-- GET /kolekcija/{naziv}/nadji/{id} (vraca jedan spomenik)
-- GET /kolekcija/{naziv}/kategorije (vraca sve kategorije po kolekciji)
-- POST /kolekcija/{naziv}/dodaj (obavezna polja: naslov, kategorija, lat i lon, opciono: opis, slika)
-- PUT /kolekcija/{naziv}/uredi/{id} (opciono se azurira bilo koje polje)
-- DELETE /kolekcija/{naziv}/obrisi/{id}
+Server vraca sliku kao [base64](https://stackoverflow.com/questions/8499633/how-to-display-base64-images-in-html) string. U HTML-u se prikazuje na sledeci nacin: `<img src="data:image/png;base64, ${slika}" />`
 
-Slika se salje kao fajl, a server je sluzi kao [base64](https://stackoverflow.com/questions/8499633/how-to-display-base64-images-in-html) string. U HTML-u se prikazuje na sledeci nacin: `<img src="data:image/png;base64, ${slika}" />`
+#### GET /kolekcija/{naziv}/nadji/{id}
+
+Vraca jedan objekat.
+
+#### GET /kolekcija/{naziv}/kategorije
+
+Vraca sve kategorije po kolekciji.
+
+#### POST /kolekcija/{naziv}/dodaj (za prijavljene korisnike)
+
+Obavezna i opciona polja kada se šalje novi objekat:
+
+```js
+{
+  naslov: String,     // required
+  opis: String,
+  kategorija: String, // required
+  // geolokacija
+  lat: Number,        // required
+  lon: Number         // required
+  slika: File,
+  website: String,
+  // radno vreme u formatu 0-24
+  od: Number,
+  do: Number
+}
+```
+
+Slika se salje serveru kao fajl.
+
+#### PUT /kolekcija/{naziv}/uredi/{id} (za prijavljene korisnike)
+
+Može se opciono azurirati bilo koje polje na osnovu id-a.
+
+#### DELETE /kolekcija/{naziv}/obrisi/{id} (za admine)
 
 ### Korisnici
 
