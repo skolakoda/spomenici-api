@@ -7,8 +7,8 @@ const dodaj = async(req, res) => {
   const { kolekcija } = req.params
   const { naslov, kategorija, opis, lat, lon, website, od } = req.body
   const slika = await konvertujSliku(req.files)
-  const Spomenik = model('Spomenik', SpomenikSchema, kolekcija)
 
+  const Spomenik = model('Spomenik', SpomenikSchema, kolekcija)
   const spomenik = new Spomenik({
     naslov,
     opis,
