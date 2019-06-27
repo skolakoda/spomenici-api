@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken')
 const nodeMailer = require('nodemailer')
+const sharp = require('sharp')
 
 const { tokenKey, emailPass } = require('./config')
 const { SuccRes, ErrRes } = require('./interfaces')
@@ -51,9 +52,16 @@ const sendEmail = (req, res, email) => {
   return trialPass
 }
 
+const konvertujSliku = async files => {
+  if (!files || !files.slika) return ''
+  const data = await sharp(files.slika.data).resize(280).toBuffer()
+  return data.toString('base64')
+}
+
 module.exports = {
   nevalidnaLokacija,
   emailCheck,
   tokenCheck,
-  sendEmail
+  sendEmail,
+  konvertujSliku
 }

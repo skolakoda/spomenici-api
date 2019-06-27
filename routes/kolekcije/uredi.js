@@ -1,20 +1,12 @@
 const { model } = require('mongoose')
-const sharp = require('sharp')
-
-const { ErrRes, SuccRes } = require('../../utils/interfaces')
 const SpomenikSchema = require('../../models/SpomenikSchema')
+const { ErrRes, SuccRes } = require('../../utils/interfaces')
+const { konvertujSliku } = require('../../utils/helpers')
 
 const uredi = async(req, res) => {
-
   const { kolekcija, id } = req.params
   const { naslov, kategorija, opis, lat, lon, website, od } = req.body
-
-  let slikaString = ''
-  if (req.files) {
-    const { slika } = req.files
-    const data = await sharp(slika.data).resize(280).toBuffer()
-    slikaString = data.toString('base64')
-  }
+  const slika = await konvertujSliku(req.files)
 
   const Spomenik = model('Spomenik', SpomenikSchema, kolekcija)
   const spomenik = await Spomenik.findOne({ _id: id })
@@ -23,7 +15,7 @@ const uredi = async(req, res) => {
   if (kategorija) spomenik.kategorija = kategorija
   if (opis) spomenik.opis = opis
   if (lat && lon) spomenik.lokacija = { lat, lon }
-  if (slikaString) spomenik.slika = slikaString
+  if (slika) spomenik.slika = slika
   if (website) spomenik.website = website
   if (od && req.body.do) spomenik.radnoVreme = { od, do: req.body.do }
 
