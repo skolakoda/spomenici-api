@@ -20,7 +20,12 @@
     "dot-notation": "warn",
     "no-else-return": "error",
     "no-global-assign": "error",
-    "prefer-destructuring": "error",
+    "prefer-destructuring": ["error", {
+      "AssignmentExpression": {
+        "array": false,
+        "object": false
+      }
+    }],
     "no-invalid-this": "error",
     "block-scoped-var": "error",
     "no-param-reassign": "error",
