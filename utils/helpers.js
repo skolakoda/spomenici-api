@@ -14,15 +14,15 @@ const emailCheck = email => {
 }
 
 const tokenCheck = (req, res, next) => {
-  const auth = req.headers['auth']
+  const auth = req.headers.auth
   if (typeof auth !== 'undefined') {
     const token = auth.split(' ')[1]
-    if (jwt.verify(token, tokenKey)) {
+    if (jwt.verify(token, tokenKey)) 
       next()
-    }
-  } else {
+    
+  } else 
     return res.status(403).send(new ErrRes('Pogresan token'))
-  }
+  
 }
 
 const sendEmail = (req, res, email) => {
@@ -43,11 +43,11 @@ const sendEmail = (req, res, email) => {
   }
 
   transporter.sendMail(mailOptions, (err, info) => {
-    if (err) {
+    if (err) 
       res.status(400).send(new ErrRes(err.message))
-    } else {
+    else 
       res.status(200).send(new SuccRes(`Email je poslat! ${info.response}`))
-    }
+    
   })
   return trialPass
 }
