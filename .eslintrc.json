@@ -20,6 +20,7 @@
     "dot-notation": "warn",
     "no-else-return": "error",
     "no-global-assign": "error",
+    "prefer-destructuring": "error",
     "no-invalid-this": "error",
     "block-scoped-var": "error",
     "no-param-reassign": "error",

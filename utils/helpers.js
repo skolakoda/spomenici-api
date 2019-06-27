@@ -6,7 +6,7 @@ const { tokenKey, emailPass } = require('./config')
 const { SuccRes, ErrRes } = require('./interfaces')
 
 const tokenCheck = (req, res, next) => {
-  const auth = req.headers.auth
+  const {auth} = req.headers
   if (!auth) return res.status(403).send(new ErrRes('Nema tokena'))
 
   const token = auth.split(' ')[1]
