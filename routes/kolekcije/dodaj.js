@@ -10,7 +10,7 @@ const dodaj = async(req, res) => {
   const Spomenik = model('Spomenik', SpomenikSchema, kolekcija)
 
   const spomenik = new Spomenik({
-    ...req.body,  // otpakuje sva polja
+    ...req.body,  // otpakuje sva polja, mungos sam filtrira
     slika,
     lokacija: { lat, lon },
     radnoVreme: { od, do: req.body.do }
