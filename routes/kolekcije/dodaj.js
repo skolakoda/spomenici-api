@@ -5,15 +5,12 @@ const { konvertujSliku } = require('../../utils/helpers')
 
 const dodaj = async(req, res) => {
   const { kolekcija } = req.params
-  const { naslov, kategorija, opis, lat, lon, website, od } = req.body
+  const { lat, lon, od } = req.body // do je rezervisana rec
   const slika = await konvertujSliku(req.files)
-
   const Spomenik = model('Spomenik', SpomenikSchema, kolekcija)
+
   const spomenik = new Spomenik({
-    naslov,
-    opis,
-    kategorija,
-    website,
+    ...req.body,  // otpakuje sva polja
     slika,
     lokacija: { lat, lon },
     radnoVreme: { od, do: req.body.do }
