@@ -1,6 +1,6 @@
 const port = process.env.PORT || 8090
 const URI = process.env.DB_URI
-const DB_NAME = process.env.DB_NAME
+const {DB_NAME} = process.env
 const tokenKey = process.env.TOKEN_KLJUCH
 const emailPass = process.env.EMAIL
 

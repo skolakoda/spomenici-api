@@ -1,30 +1,17 @@
 const { model } = require('mongoose')
-const sharp = require('sharp')
-
-const { ErrRes, SuccRes } = require('../../utils/interfaces')
 const SpomenikSchema = require('../../models/SpomenikSchema')
+const { ErrRes, SuccRes } = require('../../utils/interfaces')
+const { konvertujSliku } = require('../../utils/helpers')
 
 const dodaj = async(req, res) => {
-
   const { kolekcija } = req.params
-  const { naslov, kategorija, opis, lat, lon, website, od } = req.body
-
-  let slikaString = ''
-  if (req.files) {
-    const { slika } = req.files
-    const data = await sharp(slika.data)
-      .resize(280)
-      .toBuffer()
-    slikaString = data.toString('base64')
-  }
-
+  const { lat, lon, od } = req.body // do je rezervisana rec
+  const slika = await konvertujSliku(req.files)
   const Spomenik = model('Spomenik', SpomenikSchema, kolekcija)
+
   const spomenik = new Spomenik({
-    naslov,
-    opis,
-    kategorija,
-    website,
-    slika: slikaString,
+    ...req.body,  // otpakuje sva polja
+    slika,
     lokacija: { lat, lon },
     radnoVreme: { od, do: req.body.do }
   })

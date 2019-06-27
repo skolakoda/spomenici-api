@@ -1,27 +1,19 @@
 const jwt = require('jsonwebtoken')
 const nodeMailer = require('nodemailer')
+const sharp = require('sharp')
 
 const { tokenKey, emailPass } = require('./config')
 const { SuccRes, ErrRes } = require('./interfaces')
 
-const nevalidnaLokacija = (lat, lon) =>
-  lat > 47.2 || lat < 42 || lon > 23 || lon < 19
-
-const emailCheck = email => {
-  const regex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-  return regex.test(email)
-}
-
 const tokenCheck = (req, res, next) => {
-  const auth = req.headers['auth']
-  if (typeof auth !== 'undefined') {
-    const token = auth.split(' ')[1]
-    if (jwt.verify(token, tokenKey)) {
-      next()
-    }
-  } else {
-    return res.status(403).send(new ErrRes('Pogresan token'))
-  }
+  const {auth} = req.headers
+  if (!auth) return res.status(403).send(new ErrRes('Nema tokena'))
+
+  const token = auth.split(' ')[1]
+  if (jwt.verify(token, tokenKey))
+    next()
+  else
+    res.status(403).send(new ErrRes('Nevalidan token'))
 }
 
 const sendEmail = (req, res, email) => {
@@ -42,18 +34,20 @@ const sendEmail = (req, res, email) => {
   }
 
   transporter.sendMail(mailOptions, (err, info) => {
-    if (err) {
-      res.status(400).send(new ErrRes(err.message))
-    } else {
-      res.status(200).send(new SuccRes(`Email je poslat! ${info.response}`))
-    }
+    if (err) return res.status(400).send(new ErrRes(err.message))
+    res.status(200).send(new SuccRes(`Email je poslat! ${info.response}`))
   })
   return trialPass
 }
 
+const konvertujSliku = async files => {
+  if (!files || !files.slika) return ''
+  const data = await sharp(files.slika.data).resize(280).toBuffer()
+  return data.toString('base64')
+}
+
 module.exports = {
-  nevalidnaLokacija,
-  emailCheck,
   tokenCheck,
-  sendEmail
+  sendEmail,
+  konvertujSliku
 }
