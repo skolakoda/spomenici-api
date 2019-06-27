@@ -12,9 +12,7 @@ const dodaj = async(req, res) => {
   let slikaString = ''
   if (req.files) {
     const { slika } = req.files
-    const data = await sharp(slika.data)
-      .resize(280)
-      .toBuffer()
+    const data = await sharp(slika.data).resize(280).toBuffer()
     slikaString = data.toString('base64')
   }
 
