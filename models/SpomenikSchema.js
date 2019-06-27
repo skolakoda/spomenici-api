@@ -51,6 +51,10 @@ const SpomenikSchema = new mongoose.Schema({
       min: 0,
       max: 24
     }
+  },
+  __v: {
+    type: Number,
+    select: false // ne sluzi versionKey
   }
 })
 
