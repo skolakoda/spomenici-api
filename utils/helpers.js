@@ -14,7 +14,30 @@ const tokenCheck = (req, res, next) => {
   else res.status(403).send(new ErrRes('Nevalidan token'))
 }
 
-const sendEmail = (req, res, email, type) => {
+const createMailOptions = (email, type, trialPass) => {
+  const mailOptions = {
+    from: 'spomeniciskolakoda@gmail.com',
+    to: email,
+  }
+  switch (type) {
+    case 'register':
+      return {
+        ...mailOptions,
+        subject: `Pozdrav ${email}!`,
+        text: 'Dobrodošli! Prijavom na aplikaciju mozete dodavati/menjati znamenitosti na mapi. Uživajte!'
+      }
+    case 'reset':
+      return {
+        ...mailOptions,
+        subject: 'Promena šifre!',
+        text: `Vaša trenutna šifra je ${trialPass}. Molimo da je promenite u aplikaciji`
+      }
+    default:
+      return null
+  }
+}
+
+const sendEmail = (res, email, type) => {
   const transporter = nodeMailer.createTransport({
     service: 'Gmail',
     auth: {
@@ -22,36 +45,13 @@ const sendEmail = (req, res, email, type) => {
       pass: `${emailPass}`
     }
   })
-  let mailOptions
-  let trialPass
-
-  switch (type) {
-    case type === 'register':
-      mailOptions = {
-        from: 'spomeniciskolakoda@gmail.com',
-        to: email,
-        subject: `Pozdrav ${email}!`,
-        text:
-          'Dobrodošli! Prijavom na aplikaciju mozete dodavati/menjati znamenitosti na mapi. Uživajte!'
-      }
-      break
-    case type === 'reset':
-      trialPass = `${Math.floor(Math.random() * 10000000)}`
-      mailOptions = {
-        from: 'spomeniciskolakoda@gmail.com',
-        to: email,
-        subject: 'Promena šifre!',
-        text: `Vaša trenutna šifra je ${trialPass}. Molimo da je promenite u aplikaciji`
-      }
-    default:
-      break
-  }
-
+  const trialPass = type === 'reset' ? Math.floor(Math.random() * 10000000) : null
+  const mailOptions = createMailOptions(email, type, trialPass)
   transporter.sendMail(mailOptions, (err, info) => {
     if (err) return res.status(400).send(new ErrRes(err.message))
     res.status(200).send(new SuccRes(`Email je poslat! ${info.response}`))
   })
-  if (trialPass.length !== 0) return trialPass
+  return trialPass
 }
 
 const konvertujSliku = async files => {
