@@ -6,7 +6,6 @@ const fileUpload = require('express-fileupload')
 const mongoose = require('mongoose')
 
 const { port, domain, URI } = require('./utils/config')
-// TODO: odvojiti ruter u zaseban fajl
 const colectionRouter = require('./routes/kolekcije/index')
 const userRouter = require('./routes/users/index')
 
@@ -16,17 +15,12 @@ app.use(cors())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(fileUpload())
-// TODO: odvojiti logger u helpers i dodati ga samo kad je development
-app.use((req, res, next) => {
-  console.log(req.method, req.url)
-  next()
-})
 mongoose.set('useCreateIndex', true) // https://mongoosejs.com/docs/deprecations.html#ensureindex
 
-// Routes
+// Routes (odvojiti u zaseban fajl)
 app.use('/korisnici', userRouter)
 app.use('/kolekcija', colectionRouter)
-app.get('/', (req, res) => res.send('Dobrodosli na Spomenici-API!'))
+app.get('/', (req, res) => res.send('Dobrodosli na Spomenici-API!')) // eslint-disable-line no-unused-vars
 
 // Start
 mongoose.connect(URI, { useNewUrlParser: true })

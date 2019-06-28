@@ -1,32 +1,16 @@
 const md5 = require('md5')
-const jwt = require('jsonwebtoken')
 
-const { tokenKey } = require('../../utils/config')
 const { SuccRes, ErrRes } = require('../../utils/interfaces')
 const User = require('../../models/User')
-const Token = require('../../models/Token')
 
-const login = (req, res) => {
+module.exports = (req, res) => {
   const { email, pass } = req.body
 
   User.findOne({ email, password: md5(pass) }).then(user => {
     if (!user)
       return res.status(400).send(new ErrRes('Pogresan email ili lozinka'))
 
-    const token = jwt.sign({ user }, tokenKey, { expiresIn: '30d' })
-    const tokenModel = new Token({
-      userId: user._id,
-      token,
-      dodat: Date.now()
-    })
-
-    tokenModel
-      .save()
-      .then(data =>
-        res.json(new SuccRes('Token je ubacen u kolekciju u:', data.dodat))
-      )
-      .catch(err => res.status(400).send(new ErrRes(err.message)))
+    const token = user.napraviToken()
+    res.header('x-auth-token', token).json(new SuccRes('Dobili ste pristupni token.', token))
   })
 }
-
-module.exports = login
