@@ -1,6 +1,7 @@
 const md5 = require('md5')
 
 const { ErrRes, SuccRes } = require('../../utils/interfaces')
+const { sendEmail } = require('../../utils/helpers')
 const User = require('../../models/User')
 
 module.exports = (req, res) => {
@@ -15,8 +16,9 @@ module.exports = (req, res) => {
 
   user
     .save()
-    .then(data =>
-      res.json(new SuccRes('Uspesno ste registrovani ->', data.email))
-    )
+    .then(data => {
+      res.json(new SuccRes('Uspesno ste registrovani ->', data.email)),
+      sendEmail(req, res, data.email, 'register')
+    })
     .catch(err => res.status(400).send(err.message))
 }
