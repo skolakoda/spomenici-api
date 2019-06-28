@@ -63,10 +63,10 @@ Može se opciono azurirati bilo koje polje na osnovu id-a.
 ## Autentikacija
 
 - POST /korisnici/registracija (obavezna polja: email, pass i repeatPass)
+- POST /korisnici/login (obavezna polja: email i pass)
 - GET /korisnici/pokazi/id (vraca jednog korisnika)
-- POST /korisnici/login
 - PUT /korisnici/uredi/id (opciono se azurira bilo koje polje)
-- GET /korisnici/email (obavezno polje email)
+- GET /korisnici/email (salje lozinku na email, obavezno polje email)
 
 Nakon uspesne prijave, za svaki naredni HTTP zahtev u headeru slati polje `auth` sa vrednoscu "Bearer ${token}"
 
