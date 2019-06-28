@@ -8,22 +8,15 @@ const email = (req, res) => {
   const { email } = req.body
 
   User.findOne({ email }).then(user => {
-    if (!user)
-      return res.send(new ErrRes('Email se ne nalazi u bazi korisnika'))
+    if (!user) return res.send(new ErrRes('Email se ne nalazi u bazi.'))
 
     const trialPass = sendEmail(user.email, 'reset')
-
-    const password = md5(trialPass)
-    user.password = password
+    user.password = md5(trialPass)
 
     user
       .save()
       .then(data =>
-        res.json(
-          new SuccRes(
-            `Trenutna sifra upisana u bazu za korisnika: ${data.email}`
-          )
-        )
+        res.json(new SuccRes(`Proverite email ${data.email} za novu lozinku.`))
       )
       .catch(err =>
         res.status(400).send(`Greska : ${new ErrRes(err.message)}`)

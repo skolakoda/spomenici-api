@@ -3,7 +3,7 @@ const nodeMailer = require('nodemailer')
 const sharp = require('sharp')
 
 const { tokenKey, emailPass } = require('./config')
-const { SuccRes, ErrRes } = require('./interfaces')
+const { ErrRes } = require('./interfaces')
 
 const tokenCheck = (req, res, next) => {
   const { auth } = req.headers
