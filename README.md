@@ -72,7 +72,9 @@ Nakon uspesne registracije vraca token u `x-auth-token` polju u headeru.
 
 Obavezna polja: email i pass.
 
-Nakon uspesne prijave vraca token kao odgovor. Za svaki naredni HTTP zahtev u headeru slati polje `auth` sa vrednoscu "Bearer ${token}"
+Nakon uspesne prijave vraca token kao odgovor.
+
+Za svaki naredni ovlasceni zahtev u headeru slati polje `x-auth-token` sa tokenom.
 
 #### GET /korisnici/pokazi/id
 
