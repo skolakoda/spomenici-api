@@ -13,7 +13,7 @@ module.exports = (req, res) => {
     if (!user)
       return res.status(400).send(new ErrRes('Pogresan email ili lozinka'))
 
-    const token = jwt.sign({ user }, tokenKey, { expiresIn: '30d' })
+    const token = jwt.sign({ _id: user._id }, tokenKey, { expiresIn: '30d' })
     const tokenModel = new Token({
       userId: user._id,
       token,
