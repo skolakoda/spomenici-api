@@ -6,7 +6,15 @@ Vidi: https://spomenici-api.herokuapp.com/
 
 ## API Dokumentacija
 
-### Kolekcije objekata
+Svaki odgovor servera ima standardan JSON format:
+
+```
+{
+  "status": "success", // ili "error"
+  "data": {}, // ili null
+  "message": "Info poruka" // ili null
+}
+```
 
 #### GET /kolekcija/{naziv}
 
@@ -14,7 +22,7 @@ Vraca sve objekte. Umesto varijable `naziv`, mozete uneti bilo koju postojecu ko
 - [/kolekcija/itfirme](https://spomenici-api.herokuapp.com/kolekcija/itfirme)
 - [/kolekcija/toilets](https://spomenici-api.herokuapp.com/kolekcija/toilets)
 
-Server vraca sliku kao [base64](https://stackoverflow.com/questions/8499633/how-to-display-base64-images-in-html) string. U HTML-u se prikazuje na sledeci nacin: `<img src="data:image/png;base64, ${slika}" />`
+Server vraca sliku kao [base64](https://stackoverflow.com/questions/8499633/how-to-display-base64-images-in-html) string. Da bi se prikazala u HTML-u potrebno je dodati prefiks `data:image/png;base64,`
 
 #### GET /kolekcija/{naziv}/nadji/{id}
 
@@ -33,12 +41,12 @@ Obavezna i opciona polja kada se šalje novi objekat:
   naslov: String,     // required
   opis: String,
   kategorija: String, // required
-  // geolokacija
+  // geolokacija:
   lat: Number,        // required
   lon: Number         // required
   slika: File,
   website: String,
-  // radno vreme u formatu 0-24
+  // radno vreme u formatu 0-24:
   od: Number,
   do: Number
 }
@@ -52,7 +60,7 @@ Može se opciono azurirati bilo koje polje na osnovu id-a.
 
 #### DELETE /kolekcija/{naziv}/obrisi/{id} (za admine)
 
-### Korisnici
+## Autentikacija
 
 - POST /korisnici/registracija (obavezna polja: email, pass i repeatPass)
 - GET /korisnici/pokazi/id (vraca jednog korisnika)
@@ -61,18 +69,6 @@ Može se opciono azurirati bilo koje polje na osnovu id-a.
 - GET /korisnici/email (obavezno polje email)
 
 Nakon uspesne prijave, za svaki naredni HTTP zahtev u headeru slati polje `auth` sa vrednoscu "Bearer ${token}"
-
-### Format odgovora
-
-Svaki odgovor servera ima standardan JSON format:
-
-```
-{
-  "status": "success", // ili "error"
-  "data": {}, // ili null
-  "message": "Info poruka" // ili null
-}
-```
 
 ## Razvoj
 
