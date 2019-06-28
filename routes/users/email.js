@@ -11,7 +11,7 @@ const email = (req, res) => {
     if (!user)
       return res.send(new ErrRes('Email se ne nalazi u bazi korisnika'))
 
-    const trialPass = sendEmail(res, user.email, 'reset')
+    const trialPass = sendEmail(user.email, 'reset')
 
     const password = md5(trialPass)
     user.password = password

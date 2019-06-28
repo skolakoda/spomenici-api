@@ -37,7 +37,7 @@ const createMailOptions = (email, type, trialPass) => {
   }
 }
 
-const sendEmail = (res, email, type) => {
+const sendEmail = (email, type) => {
   const transporter = nodeMailer.createTransport({
     service: 'Gmail',
     auth: {
@@ -48,8 +48,8 @@ const sendEmail = (res, email, type) => {
   const trialPass = type === 'reset' ? Math.floor(Math.random() * 10000000) : null
   const mailOptions = createMailOptions(email, type, trialPass)
   transporter.sendMail(mailOptions, (err, info) => {
-    if (err) return res.status(400).send(new ErrRes(err.message))
-    res.status(200).send(new SuccRes(`Email je poslat! ${info.response}`))
+    if (err) return console.error(err.message)
+    console.log(`Email je poslat! ${info.response}`)
   })
   return trialPass
 }

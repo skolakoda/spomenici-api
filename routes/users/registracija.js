@@ -17,7 +17,7 @@ module.exports = (req, res) => {
   user
     .save()
     .then(data => {
-      sendEmail(res, data.email, 'register')
+      sendEmail(data.email, 'register')
       res.json(new SuccRes('Uspesno ste registrovani.', { _id: data._id}))
     })
     .catch(err => res.status(400).send(err.message))
