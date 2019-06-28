@@ -72,7 +72,7 @@ Nakon uspesne registracije vraca token u `x-auth-token` polju u headeru.
 
 Obavezna polja: email i pass.
 
-Nakon uspesne prijave vraca token kao odgovor.
+Nakon uspesne prijave vraca token u headeru kao odgovor.
 
 Za svaki naredni ovlasceni zahtev u headeru slati polje `x-auth-token` sa tokenom.
 
@@ -109,6 +109,6 @@ Konacno, kad dodate varijable okruzenja, pokrenite:
 $ npm run dev
 ```
 
-### Kodni standard
+## Kodni standard
 
 Ovaj projekat koristi [kodni standard Škole koda](https://github.com/skolakoda/kodni-standard).
