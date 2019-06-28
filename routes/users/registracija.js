@@ -4,18 +4,17 @@ const { ErrRes, SuccRes } = require('../../utils/interfaces')
 const { sendEmail } = require('../../utils/helpers')
 const User = require('../../models/User')
 
-module.exports = (req, res) => {
+module.exports = async(req, res) => {
   const { email, pass, repeatPass } = req.body
   if (pass !== repeatPass) return res.status(400).send(new ErrRes('Lozinke nisu identicne'))
 
-  const user = new User({
-    email,
-    password: md5(pass)
-  })
-  const token = user.napraviToken()
+  const user = await User.findOne({ email })
+  if (user) return res.status(400).send(new ErrRes('Korisnik vec postoji'))
 
-  user
-    .save()
+  const noviUser = new User({ email, password: md5(pass) })
+  const token = noviUser.napraviToken()
+
+  noviUser.save()
     .then(data => {
       sendEmail(data.email, 'register')
       res.header('x-auth-token', token).json(new SuccRes('Uspesno ste registrovani.', { _id: data._id}))
