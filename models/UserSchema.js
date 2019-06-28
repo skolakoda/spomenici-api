@@ -1,5 +1,8 @@
 const mongoose = require('mongoose')
 const uniqueValidator = require('mongoose-unique-validator')
+const jwt = require('jsonwebtoken')
+
+const { tokenKey } = require('../utils/config')
 
 const UserSchema = new mongoose.Schema({
   email: {
@@ -25,6 +28,10 @@ const UserSchema = new mongoose.Schema({
     default: 'user'
   }
 })
+
+UserSchema.methods.napraviToken = function() {
+  return jwt.sign({ _id: this._id }, tokenKey, { expiresIn: '30d' })
+}
 
 UserSchema.plugin(uniqueValidator)
 

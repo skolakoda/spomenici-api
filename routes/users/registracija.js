@@ -1,7 +1,5 @@
 const md5 = require('md5')
-const jwt = require('jsonwebtoken')
 
-const { tokenKey } = require('../../utils/config')
 const { ErrRes, SuccRes } = require('../../utils/interfaces')
 const { sendEmail } = require('../../utils/helpers')
 const User = require('../../models/User')
@@ -16,7 +14,7 @@ module.exports = (req, res) => {
     password: md5(pass)
   })
 
-  const token = jwt.sign({ _id: user._id }, tokenKey, { expiresIn: '30d' })
+  const token = user.napraviToken()
 
   user
     .save()
