@@ -11,10 +11,7 @@ module.exports = async(req, res) => {
   const user = await User.findOne({ email })
   if (user) return res.status(400).send(new ErrRes('Korisnik vec postoji'))
 
-  const noviUser = new User({
-    email,
-    password: md5(pass)
-  })
+  const noviUser = new User({ email, password: md5(pass) })
   const token = noviUser.napraviToken()
 
   noviUser.save()
