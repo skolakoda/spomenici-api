@@ -84,7 +84,7 @@ Vraca jednog korisnika
 
 Opciono se azurira bilo koje polje.
 
-#### GET /korisnici/email
+#### GET /korisnici/reset-password
 
 Obavezno polje je email. Salje novu lozinku na email.
 

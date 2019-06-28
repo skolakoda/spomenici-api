@@ -4,18 +4,17 @@ const { ErrRes, SuccRes } = require('../../utils/interfaces')
 const { sendEmail } = require('../../utils/helpers')
 const User = require('../../models/User')
 
-const email = (req, res) => {
+module.exports = (req, res) => {
   const { email } = req.body
 
   User.findOne({ email }).then(user => {
     if (!user) return res.send(new ErrRes('Email se ne nalazi u bazi.'))
 
-    const trialPass = Math.floor(Math.random() * 10000000)
-    sendEmail(user.email, 'reset', trialPass)
-    user.password = md5(trialPass)
+    const tempPass = Math.floor(Math.random() * 10000000)
+    sendEmail(user.email, 'reset', tempPass)
+    user.password = md5(tempPass)
 
-    user
-      .save()
+    user.save()
       .then(data =>
         res.json(new SuccRes(`Proverite email ${data.email} za novu lozinku.`))
       )
@@ -24,5 +23,3 @@ const email = (req, res) => {
       )
   })
 }
-
-module.exports = email
