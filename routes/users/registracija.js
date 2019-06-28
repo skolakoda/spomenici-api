@@ -6,14 +6,12 @@ const User = require('../../models/User')
 
 module.exports = (req, res) => {
   const { email, pass, repeatPass } = req.body
-  if (pass !== repeatPass)
-    return res.status(400).send(new ErrRes('Lozinke nisu identicne'))
+  if (pass !== repeatPass) return res.status(400).send(new ErrRes('Lozinke nisu identicne'))
 
   const user = new User({
     email,
     password: md5(pass)
   })
-
   const token = user.napraviToken()
 
   user
