@@ -18,7 +18,13 @@ const adminCheck = (req, res, next) => {
   next()
 }
 
+const logger = (req, res, next) => {  // eslint-disable-line no-unused-vars
+  console.log(req.method, req.url)
+  next()
+}
+
 module.exports = {
   tokenCheck,
-  adminCheck
+  adminCheck,
+  logger
 }
