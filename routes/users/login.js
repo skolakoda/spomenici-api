@@ -12,9 +12,7 @@ module.exports = (req, res) => {
     if (!user)
       return res.status(400).send(new ErrRes('Pogresan email ili lozinka'))
 
-    jwt.sign({ _id: user._id }, tokenKey, { expiresIn: '30d' }, (err, token) => {
-      if (err) return res.status(400).send(new ErrRes(err.message))
-      res.json(new SuccRes('Dobili ste pristupni token.', token))
-    })
+    const token = jwt.sign({ _id: user._id }, tokenKey, { expiresIn: '30d' })
+    res.json(new SuccRes('Dobili ste pristupni token.', token))
   })
 }
