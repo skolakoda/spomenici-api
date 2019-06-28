@@ -8,11 +8,10 @@ const email = (req, res) => {
   const { email } = req.body
 
   User.findOne({ email }).then(user => {
-    if (!user) 
+    if (!user)
       return res.send(new ErrRes('Email se ne nalazi u bazi korisnika'))
-    
 
-    const trialPass = sendEmail(req, res, user.email)
+    const trialPass = sendEmail(req, res, user.email, 'reset')
 
     const password = md5(trialPass)
     user.password = password
