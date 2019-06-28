@@ -14,7 +14,7 @@ const tokenCheck = (req, res, next) => {
   else res.status(403).send(new ErrRes('Nevalidan token'))
 }
 
-const createMailOptions = (email, type, trialPass) => {
+const createMailOptions = (email, type, info) => {
   const mailOptions = {
     from: 'spomeniciskolakoda@gmail.com',
     to: email,
@@ -23,21 +23,22 @@ const createMailOptions = (email, type, trialPass) => {
     case 'register':
       return {
         ...mailOptions,
-        subject: `Pozdrav ${email}!`,
+        subject: 'Uspesno ste registrovani',
         text: 'Dobrodošli! Prijavom na aplikaciju mozete dodavati/menjati znamenitosti na mapi. Uživajte!'
       }
     case 'reset':
       return {
         ...mailOptions,
         subject: 'Promena šifre!',
-        text: `Vaša trenutna šifra je ${trialPass}. Molimo da je promenite u aplikaciji`
+        text: `Vaša trenutna šifra je ${info}. Molimo da je promenite u aplikaciji`
       }
+    // TODO: confirm password, mozda u register
     default:
       return null
   }
 }
 
-const sendEmail = (email, type) => {
+const sendEmail = (email, type, info) => {
   const transporter = nodeMailer.createTransport({
     service: 'Gmail',
     auth: {
@@ -45,13 +46,11 @@ const sendEmail = (email, type) => {
       pass: `${emailPass}`
     }
   })
-  const trialPass = type === 'reset' ? Math.floor(Math.random() * 10000000) : null
-  const mailOptions = createMailOptions(email, type, trialPass)
+  const mailOptions = createMailOptions(email, type, info)
   transporter.sendMail(mailOptions, (err, info) => {
     if (err) return console.error(err.message)
     console.log(`Email je poslat! ${info.response}`)
   })
-  return trialPass
 }
 
 const konvertujSliku = async files => {

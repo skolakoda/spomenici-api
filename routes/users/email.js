@@ -10,7 +10,8 @@ const email = (req, res) => {
   User.findOne({ email }).then(user => {
     if (!user) return res.send(new ErrRes('Email se ne nalazi u bazi.'))
 
-    const trialPass = sendEmail(user.email, 'reset')
+    const trialPass = Math.floor(Math.random() * 10000000)
+    sendEmail(user.email, 'reset', trialPass)
     user.password = md5(trialPass)
 
     user
