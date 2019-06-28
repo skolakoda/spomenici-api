@@ -6,7 +6,7 @@ const { SuccRes, ErrRes } = require('../../utils/interfaces')
 const User = require('../../models/User')
 const Token = require('../../models/Token')
 
-const login = (req, res) => {
+module.exports = (req, res) => {
   const { email, pass } = req.body
 
   User.findOne({ email, password: md5(pass) }).then(user => {
@@ -23,10 +23,8 @@ const login = (req, res) => {
     tokenModel
       .save()
       .then(data =>
-        res.json(new SuccRes('Token je ubacen u kolekciju u:', data.dodat))
+        res.json(new SuccRes('Dobili ste pristupni token.', data.token))
       )
       .catch(err => res.status(400).send(new ErrRes(err.message)))
   })
 }
-
-module.exports = login
