@@ -5,18 +5,17 @@ const { konvertujSliku } = require('../../utils/helpers')
 
 const uredi = async(req, res) => {
   const { kolekcija, id } = req.params
-  const { naslov, kategorija, opis, lat, lon, website, od } = req.body
+  const { lat, lon, od } = req.body
   const slika = await konvertujSliku(req.files)
   const Spomenik = model('Spomenik', SpomenikSchema, kolekcija)
 
   const spomenik = await Spomenik.findOne({ _id: id })
 
-  if (naslov) spomenik.naslov = naslov
-  if (kategorija) spomenik.kategorija = kategorija
-  if (opis) spomenik.opis = opis
-  if (lat && lon) spomenik.lokacija = { lat, lon }
+  for (const prop in req.body) // ubacuje sva prosta polja koja prodju shemu
+    if (req.body[prop]) spomenik[prop] = req.body[prop]
+
   if (slika) spomenik.slika = slika
-  if (website) spomenik.website = website
+  if (lat && lon) spomenik.lokacija = { lat, lon }
   if (od && req.body.do) spomenik.radnoVreme = { od, do: req.body.do }
 
   spomenik.save()
