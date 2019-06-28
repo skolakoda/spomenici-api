@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const { tokenCheck } = require('../../utils/helpers')
+const { tokenCheck } = require('../../utils/middleware')
 
 router.get('/:kolekcija', require('./izlistaj'))
 router.get('/:kolekcija/kategorije', require('./kategorije'))

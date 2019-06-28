@@ -1,17 +1,7 @@
-const jwt = require('jsonwebtoken')
 const nodeMailer = require('nodemailer')
 const sharp = require('sharp')
 
-const { tokenKey, emailPass } = require('./config')
-const { ErrRes } = require('./interfaces')
-
-const tokenCheck = (req, res, next) => {
-  const token = req.headers['x-auth-token']
-  if (!token) return res.status(403).send(new ErrRes('Nema tokena'))
-
-  if (jwt.verify(token, tokenKey)) next()
-  else res.status(403).send(new ErrRes('Nevalidan token'))
-}
+const { emailPass } = require('./config')
 
 const createMailOptions = (email, type, info) => {
   const mailOptions = {
@@ -61,7 +51,6 @@ const konvertujSliku = async files => {
 }
 
 module.exports = {
-  tokenCheck,
   sendEmail,
   konvertujSliku
 }

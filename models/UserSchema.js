@@ -30,7 +30,7 @@ const UserSchema = new mongoose.Schema({
 })
 
 UserSchema.methods.napraviToken = function() {
-  return jwt.sign({ _id: this._id }, tokenKey, { expiresIn: '30d' })
+  return jwt.sign({ _id: this._id, role: this.role }, tokenKey, { expiresIn: '30d' })
 }
 
 UserSchema.plugin(uniqueValidator)

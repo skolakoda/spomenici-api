@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 
-const { tokenCheck } = require('../../utils/helpers')
+const { tokenCheck } = require('../../utils/middleware')
 
 router.post('/login', require('./login'))
 router.post('/registracija', require('./registracija'))
