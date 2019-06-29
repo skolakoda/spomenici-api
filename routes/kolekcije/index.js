@@ -3,6 +3,7 @@ const router = express.Router()
 const { userCheck, adminCheck } = require('../../utils/middleware')
 
 router.get('/:kolekcija', require('./izlistaj'))
+router.get('/:kolekcija/strana/:brojStrane/:poStrani?', require('./paginacija'))
 router.get('/:kolekcija/kategorije', require('./kategorije'))
 router.get('/:kolekcija/nadji/:id', require('./nadji'))
 router.use(userCheck)
