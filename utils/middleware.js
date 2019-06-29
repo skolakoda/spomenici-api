@@ -1,6 +1,15 @@
 const jwt = require('jsonwebtoken')
+const { model } = require('mongoose')
+
 const { tokenKey } = require('./config')
 const { ErrRes } = require('./interfaces')
+const SpomenikSchema = require('../models/SpomenikSchema')
+
+const addModel = (req, res, next) => {
+  const { nazivKolekcije } = req.params
+  res.locals.Spomenik = model('Spomenik', SpomenikSchema, nazivKolekcije) // dinamicki dodeljuje model
+  next()  
+}
 
 const userCheck = (req, res, next) => {
   const token = req.headers['x-auth-token']
@@ -18,12 +27,13 @@ const adminCheck = (req, res, next) => {
   next()
 }
 
-const logger = (req, res, next) => {  // eslint-disable-line no-unused-vars
+const logger = (req, res, next) => {
   console.log(req.method, req.url)
   next()
 }
 
 module.exports = {
+  addModel,
   userCheck,
   adminCheck,
   logger

@@ -118,3 +118,10 @@ $ npm run dev
 ## Kodni standard
 
 Ovaj projekat koristi [kodni standard Škole koda](https://github.com/skolakoda/kodni-standard).
+
+## TODO
+
+- prebaciti usera u lokal
+- smestiti kolekciju u local
+https://github.com/skolakoda/programming-quotes-api/blob/master/routes/router.js
+- na osnovnu get rutu da slike budu opcione

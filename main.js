@@ -6,8 +6,7 @@ const fileUpload = require('express-fileupload')
 const mongoose = require('mongoose')
 
 const { port, domain, URI } = require('./utils/config')
-const colectionRouter = require('./routes/kolekcije/index')
-const userRouter = require('./routes/users/index')
+const router = require('./routes/router')
 
 // Config
 const app = express()
@@ -15,13 +14,10 @@ app.use(cors())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(fileUpload())
-mongoose.set('useCreateIndex', true) // https://mongoosejs.com/docs/deprecations.html#ensureindex
+app.use('/', router)
 
-// Routes (odvojiti u zaseban fajl)
-app.use('/korisnici', userRouter)
-app.use('/kolekcija', colectionRouter)
-app.get('/', (req, res) => res.send('Dobrodosli na Spomenici-API!')) // eslint-disable-line no-unused-vars
+mongoose.set('useCreateIndex', true) // https://mongoosejs.com/docs/deprecations.html#ensureindex
+mongoose.connect(URI, { useNewUrlParser: true })
 
 // Start
-mongoose.connect(URI, { useNewUrlParser: true })
 app.listen(port, () => console.log(`Server at ${domain}`))

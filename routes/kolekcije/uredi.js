@@ -1,17 +1,15 @@
-const { model } = require('mongoose')
-const SpomenikSchema = require('../../models/SpomenikSchema')
 const { ErrRes, SuccRes } = require('../../utils/interfaces')
 const { konvertujSliku } = require('../../utils/helpers')
 
 const uredi = async(req, res) => {
-  const { kolekcija, id } = req.params
+  const { id } = req.params
   const { lat, lon, od } = req.body
   const slika = await konvertujSliku(req.files)
-  const Spomenik = model('Spomenik', SpomenikSchema, kolekcija)
+  const { Spomenik } = res.locals
 
   const spomenik = await Spomenik.findOne({ _id: id })
 
-  for (const prop in req.body) // ubacuje sva prosta polja koja prodju shemu
+  for (const prop in req.body) // dodaje sva prosta polja koja prodju shemu
     if (req.body[prop]) spomenik[prop] = req.body[prop]
 
   if (slika) spomenik.slika = slika
