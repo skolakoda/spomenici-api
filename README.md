@@ -28,7 +28,7 @@ Server vraca sliku kao [base64](https://stackoverflow.com/questions/8499633/how-
 
 Vraća određen broj objekata po stranici. Na primer: `/kolekcija/itfirme/strana/2`
 
-Poslednji parametar, broj predmeta `poStrani` je opcion.
+Poslednji parametar, broj predmeta `poStrani` je opcion, a podrazumevano je 20.
 
 #### GET /kolekcija/{naziv}/nadji/{id}
 
