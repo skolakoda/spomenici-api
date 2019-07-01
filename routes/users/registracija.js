@@ -5,13 +5,13 @@ const { sendEmail } = require('../../utils/helpers')
 const User = require('../../models/User')
 
 module.exports = async(req, res) => {
-  const { email, pass, repeatPass } = req.body
-  if (pass !== repeatPass) return res.status(400).send(new ErrRes('Lozinke nisu identicne'))
+  const { email, password, repeatPassword } = req.body
+  if (password !== repeatPassword) return res.status(400).send(new ErrRes('Lozinke nisu identicne'))
 
   const user = await User.findOne({ email })
   if (user) return res.status(400).send(new ErrRes('Korisnik vec postoji'))
 
-  const noviUser = new User({ email, password: md5(pass) })
+  const noviUser = new User({ email, password: md5(password) })
   const token = noviUser.napraviToken()
 
   noviUser.save()

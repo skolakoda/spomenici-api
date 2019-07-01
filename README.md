@@ -64,13 +64,13 @@ Može se opciono azurirati bilo koje polje na osnovu id-a.
 
 #### POST /korisnici/registracija
 
-Obavezna polja: email, pass i repeatPass.
+Obavezna polja: email, password i repeatPassword.
 
 Nakon uspesne registracije vraca token u `x-auth-token` polju u headeru.
 
 #### POST /korisnici/login
 
-Obavezna polja: email i pass.
+Obavezna polja: email i password.
 
 Nakon uspesne prijave vraca token u headeru kao odgovor.
 
