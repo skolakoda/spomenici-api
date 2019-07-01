@@ -10,5 +10,5 @@ module.exports = async(req, res) => {
   if (!user) return res.status(400).send(new ErrRes('Pogresan email ili lozinka'))
 
   const token = user.napraviToken()
-  res.header('x-auth-token', token).json(new SuccRes('Dobili ste pristupni token'))
+  res.header('x-auth-token', token).json(new SuccRes('Dobili ste pristupni token', token))
 }
