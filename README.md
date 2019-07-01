@@ -26,7 +26,7 @@ Server vraca sliku kao [base64](https://stackoverflow.com/questions/8499633/how-
 
 #### GET /kolekcija/{naziv}/strana/{brojStrane}/{poStrani?}
 
-Vraća određen broj objekata po stranici. Na primer: `/kolekcija/test/strana/2`
+Vraća određen broj objekata po stranici. Na primer: `/kolekcija/itfirme/strana/2`
 
 Poslednji parametar, broj predmeta `poStrani` je opcion.
 
@@ -121,7 +121,4 @@ Ovaj projekat koristi [kodni standard Škole koda](https://github.com/skolakoda/
 
 ## TODO
 
-- prebaciti usera u lokal
-- smestiti kolekciju u local
-https://github.com/skolakoda/programming-quotes-api/blob/master/routes/router.js
-- na osnovnu get rutu da slike budu opcione
+- da slike budu opcione
