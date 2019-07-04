@@ -36,7 +36,6 @@ const SpomenikSchema = new mongoose.Schema({
     }
   },
   slika: String, // depraceted, TODO: preimenovati u slikaString, u buducnosti obrisati
-  slikaUrl: String,
   slikaFajl: {
     data: Buffer,
     contentType: String
