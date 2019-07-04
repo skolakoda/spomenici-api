@@ -47,7 +47,7 @@ const konvertujSliku = async files => {
   const data = await sharp(files.slika.data)
     .resize(280)
     .toBuffer()
-  return data.toString('base64')
+  return data
 }
 
 module.exports = {
