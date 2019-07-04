@@ -1,6 +1,4 @@
 const { model } = require('mongoose')
-
-const { ErrRes } = require('../../utils/interfaces')
 const SpomenikSchema = require('../../models/SpomenikSchema')
 
 const nadji = async(req, res) => {
