@@ -24,6 +24,16 @@ Vraca sve objekte. Umesto varijable `naziv`, mozete uneti bilo koju postojecu ko
 
 Server vraca sliku kao [base64](https://stackoverflow.com/questions/8499633/how-to-display-base64-images-in-html) string. Da bi se prikazala u HTML-u potrebno je dodati prefiks `data:image/png;base64,`
 
+Ako zelite podatke bez slika, što zauzima oko stostruko manje, dodajte `/bezslika` u URL:
+
+- [/kolekcija/itfirme/bezslika](https://spomenici-api.herokuapp.com/kolekcija/itfirme/bezslika)
+
+#### GET /kolekcija/{naziv}/strana/{brojStrane}/{poStrani?}
+
+Vraća određen broj objekata po stranici. Na primer: `/kolekcija/itfirme/strana/2`
+
+Poslednji parametar, broj predmeta `poStrani` je opcion, a podrazumevano je 20.
+
 #### GET /kolekcija/{naziv}/nadji/{id}
 
 Vraca jedan objekat.
@@ -64,15 +74,15 @@ Može se opciono azurirati bilo koje polje na osnovu id-a.
 
 #### POST /korisnici/registracija
 
-Obavezna polja: email, pass i repeatPass.
+Obavezna polja: email, password i repeatPassword.
 
 Nakon uspesne registracije vraca token u `x-auth-token` polju u headeru.
 
 #### POST /korisnici/login
 
-Obavezna polja: email i pass.
+Obavezna polja: email i password.
 
-Nakon uspesne prijave vraca token kao odgovor.
+Nakon uspesne prijave vraca token u headeru kao odgovor.
 
 Za svaki naredni ovlasceni zahtev u headeru slati polje `x-auth-token` sa tokenom.
 
@@ -84,7 +94,7 @@ Vraca jednog korisnika
 
 Opciono se azurira bilo koje polje.
 
-#### GET /korisnici/email
+#### GET /korisnici/reset-password
 
 Obavezno polje je email. Salje novu lozinku na email.
 
@@ -109,6 +119,10 @@ Konacno, kad dodate varijable okruzenja, pokrenite:
 $ npm run dev
 ```
 
-### Kodni standard
+## Kodni standard
 
 Ovaj projekat koristi [kodni standard Škole koda](https://github.com/skolakoda/kodni-standard).
+
+## TODO
+
+- da slike budu opcione
