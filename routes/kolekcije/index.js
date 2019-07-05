@@ -4,7 +4,7 @@ const { userCheck, adminCheck } = require('../../utils/middleware')
 
 router.get('/', require('./izlistaj'))
 router.get('/strana/:brojStrane/:poStrani?', require('./paginacija'))
-router.get('/slika/:id', require('./sluzi-sliku'))
+router.get('/slika/:id', require('./slika'))
 router.get('/nadji/:id', require('./nadji'))
 router.get('/kategorije', require('./kategorije'))
 router.use(userCheck)
