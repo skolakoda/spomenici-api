@@ -52,10 +52,6 @@ const SpomenikSchema = new mongoose.Schema({
     type: Lokacija,
     required: true,
   },
-  slika: { // preimenovati u slikaString, u buducnosti obrisati
-    type: String,
-    select: false
-  },
   slikaFajl: {
     type: Fajl,
     select: false
