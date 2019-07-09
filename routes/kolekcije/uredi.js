@@ -4,15 +4,17 @@ const { konvertujSliku } = require('../../utils/helpers')
 const uredi = async(req, res) => {
   const { id } = req.params
   const { lat, lon, od } = req.body
-  const slika = await konvertujSliku(req.files)
   const { Spomenik } = res.locals
 
+  const slikaFajl = await konvertujSliku(req.files)
   const spomenik = await Spomenik.findOne({ _id: id })
 
-  for (const prop in req.body) // dodaje sva prosta polja koja prodju shemu
-    if (req.body[prop]) spomenik[prop] = req.body[prop]
+  // dodaje prosta polja
+  for (const polje in req.body)
+    if (req.body[polje]) spomenik[polje] = req.body[polje]
 
-  if (slika) spomenik.slika = slika
+  // dodaje slozena polja
+  if (slikaFajl) spomenik.slikaFajl = slikaFajl
   if (lat && lon) spomenik.lokacija = { lat, lon }
   if (od && req.body.do) spomenik.radnoVreme = { od, do: req.body.do }
 

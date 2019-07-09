@@ -1,6 +1,32 @@
 const mongoose = require('mongoose')
 const uniqueValidator = require('mongoose-unique-validator')
 
+const Lokacija = new mongoose.Schema({
+  lat: {
+    type: Number,
+    min: -90,
+    max: 90,
+    required: true
+  },
+  lon: {
+    type: Number,
+    min: -180,
+    max: 180,
+    required: true
+  },
+  _id: {
+    select: false
+  }
+})
+
+const Fajl = new mongoose.Schema({
+  data: Buffer,
+  contentType: String,
+  _id: {
+    select: false
+  }
+})
+
 const SpomenikSchema = new mongoose.Schema({
   naslov: {
     type: String,
@@ -8,12 +34,13 @@ const SpomenikSchema = new mongoose.Schema({
     minlength: 3,
     maxlength: 64,
     unique: true,
-    required: true
+    required: true,
   },
   opis: {
     type: String,
     maxlength: 256,
     trim: true,
+    default: ''
   },
   kategorija: {
     type: String,
@@ -22,20 +49,13 @@ const SpomenikSchema = new mongoose.Schema({
     required: true
   },
   lokacija: {
-    lat: {
-      type: Number,
-      min: -90,
-      max: 90,
-      required: true
-    },
-    lon: {
-      type: Number,
-      min: -180,
-      max: 180,
-      required: true
-    }
+    type: Lokacija,
+    required: true,
   },
-  slika: String,
+  slikaFajl: {
+    type: Fajl,
+    select: false
+  },
   website: {
     type: String,
     match: /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/gm
@@ -54,7 +74,7 @@ const SpomenikSchema = new mongoose.Schema({
   },
   __v: {
     type: Number,
-    select: false // ne sluzi versionKey
+    select: false
   }
 })
 
