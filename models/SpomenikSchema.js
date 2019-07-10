@@ -19,14 +19,6 @@ const Lokacija = new mongoose.Schema({
   }
 })
 
-const Fajl = new mongoose.Schema({
-  data: Buffer,
-  contentType: String,
-  _id: {
-    select: false
-  }
-})
-
 const SpomenikSchema = new mongoose.Schema({
   naslov: {
     type: String,
@@ -52,8 +44,8 @@ const SpomenikSchema = new mongoose.Schema({
     type: Lokacija,
     required: true,
   },
-  slikaFajl: {
-    type: Fajl,
+  slika: {
+    type: String,
     select: false
   },
   website: {
@@ -72,6 +64,7 @@ const SpomenikSchema = new mongoose.Schema({
       max: 24
     }
   },
+  gmapPlaceId: String,
   __v: {
     type: Number,
     select: false

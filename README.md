@@ -120,7 +120,3 @@ $ npm run dev
 ## Kodni standard
 
 Ovaj projekat koristi [kodni standard Škole koda](https://github.com/skolakoda/kodni-standard).
-
-## TODO
-
-- da slike budu opcione
