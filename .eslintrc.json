@@ -36,14 +36,16 @@
     "no-undef": "error",
     "no-unexpected-multiline": "error",
     "no-unreachable": "error",
-    "no-unused-vars": ["error"],
+    "no-unused-vars": ["error", { "args": "all" }],
     "no-use-before-define": "error",
     "no-useless-constructor": "error",
+    "no-useless-rename": "error",
     "no-var": "error",
     "object-shorthand": "error",
     "operator-assignment": ["error", "always"],
     "prefer-arrow-callback": "warn",
     "prefer-const": "warn",
+    "prefer-destructuring": ["warn", {"object": true, "array": false}],
     "prefer-spread": "error",
     "quotes": ["warn", "single"],
     "semi": ["warn", "never"],
@@ -54,12 +56,6 @@
     "spaced-comment": ["warn", "always"],
     "vars-on-top": "error",
     "yoda": "error",
-    "prefer-destructuring": ["error", {
-      "AssignmentExpression": {
-        "array": false,
-        "object": false
-      }
-    }],
     "new-cap": ["warn", {
       "capIsNewExceptions": ["mongodb.ObjectID", "express.Router"]
     }]

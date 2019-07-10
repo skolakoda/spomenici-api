@@ -3,12 +3,12 @@ const { konvertujSliku } = require('../../utils/helpers')
 
 const dodaj = async(req, res) => {
   const { lat, lon, od } = req.body // do je rezervisana rec
-  const slikaFajl = await konvertujSliku(req.files)
+  const slika = await konvertujSliku(req.files)
   const { Spomenik } = res.locals
 
   const spomenik = new Spomenik({
     ...req.body,  // otpakuje sve, mungos filtrira
-    slikaFajl,
+    slika,
     lokacija: { lat, lon },
     radnoVreme: { od, do: req.body.do }
   })
