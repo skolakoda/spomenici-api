@@ -27,7 +27,7 @@ const UserSchema = new mongoose.Schema({
     required: true,
     default: 'user'
   }
-})
+}, {timestamps: true})
 
 UserSchema.methods.napraviToken = function() {
   return jwt.sign({ _id: this._id, role: this.role }, tokenKey, { expiresIn: '30d' })

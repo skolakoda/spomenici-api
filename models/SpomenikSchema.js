@@ -69,7 +69,7 @@ const SpomenikSchema = new mongoose.Schema({
     type: Number,
     select: false
   }
-})
+}, {timestamps: true})
 
 SpomenikSchema.plugin(uniqueValidator) // mora da bi radilo unique
 
