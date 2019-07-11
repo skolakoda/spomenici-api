@@ -17,7 +17,7 @@ module.exports = async(req, res) => {
   noviUser.save()
     .then(data => {
       sendEmail(data.email, 'register')
-      res.header('x-auth-token', token).json(new SuccRes('Uspesno ste registrovani.', { _id: data._id}))
+      res.header('x-auth-token', token).json(new SuccRes('Uspesno ste registrovani.', { _id: data._id, token}))
     })
     .catch(err => res.status(400).send(err.message))
 }
