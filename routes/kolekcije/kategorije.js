@@ -1,12 +1,6 @@
-const { model } = require('mongoose')
-const SpomenikSchema = require('../../models/SpomenikSchema')
-
-const kategorije = async(req, res) => {
-  const { kolekcija } = req.params
-  const Spomenik = model('Spomenik', SpomenikSchema, kolekcija)
+module.exports = async(req, res) => {
+  const { Spomenik } = res.locals
 
   Spomenik.distinct('kategorija')
     .then(data => res.send(data))
 }
-
-module.exports = kategorije

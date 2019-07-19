@@ -1,16 +1,13 @@
-const { model } = require('mongoose')
-const SpomenikSchema = require('../../models/SpomenikSchema')
 const { ErrRes, SuccRes } = require('../../utils/interfaces')
 const { konvertujSliku } = require('../../utils/helpers')
 
 const dodaj = async(req, res) => {
-  const { kolekcija } = req.params
   const { lat, lon, od } = req.body // do je rezervisana rec
   const slika = await konvertujSliku(req.files)
-  const Spomenik = model('Spomenik', SpomenikSchema, kolekcija)
+  const { Spomenik } = res.locals
 
   const spomenik = new Spomenik({
-    ...req.body,  // otpakuje sva polja, mungos sam filtrira
+    ...req.body,  // otpakuje sve, mungos filtrira
     slika,
     lokacija: { lat, lon },
     radnoVreme: { od, do: req.body.do }

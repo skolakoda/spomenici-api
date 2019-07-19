@@ -22,11 +22,19 @@ Vraca sve objekte. Umesto varijable `naziv`, mozete uneti bilo koju postojecu ko
 - [/kolekcija/itfirme](https://spomenici-api.herokuapp.com/kolekcija/itfirme)
 - [/kolekcija/toilets](https://spomenici-api.herokuapp.com/kolekcija/toilets)
 
-Server vraca sliku kao [base64](https://stackoverflow.com/questions/8499633/how-to-display-base64-images-in-html) string. Da bi se prikazala u HTML-u potrebno je dodati prefiks `data:image/png;base64,`
+#### GET /kolekcija/{naziv}/slika/{id}
+
+URL ka slici objekta.
 
 #### GET /kolekcija/{naziv}/nadji/{id}
 
 Vraca jedan objekat.
+
+#### GET /kolekcija/{naziv}/strana/{brojStrane}/{poStrani?}
+
+Vraća određen broj objekata po stranici. Na primer: `/kolekcija/itfirme/strana/2`
+
+Poslednji parametar, broj predmeta `poStrani` je opcion, a podrazumevano je 20.
 
 #### GET /kolekcija/{naziv}/kategorije
 
@@ -64,13 +72,13 @@ Može se opciono azurirati bilo koje polje na osnovu id-a.
 
 #### POST /korisnici/registracija
 
-Obavezna polja: email, pass i repeatPass.
+Obavezna polja: email, password i repeatPassword.
 
 Nakon uspesne registracije vraca token u `x-auth-token` polju u headeru.
 
 #### POST /korisnici/login
 
-Obavezna polja: email i pass.
+Obavezna polja: email i password.
 
 Nakon uspesne prijave vraca token u headeru kao odgovor.
 

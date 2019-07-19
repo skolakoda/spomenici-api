@@ -43,7 +43,7 @@ const sendEmail = (email, type, info) => {
 }
 
 const konvertujSliku = async files => {
-  if (!files || !files.slika) return ''
+  if (!files || !files.slika) return null
   const data = await sharp(files.slika.data)
     .resize(280)
     .toBuffer()

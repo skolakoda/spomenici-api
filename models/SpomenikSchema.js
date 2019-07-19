@@ -1,6 +1,24 @@
 const mongoose = require('mongoose')
 const uniqueValidator = require('mongoose-unique-validator')
 
+const Lokacija = new mongoose.Schema({
+  lat: {
+    type: Number,
+    min: -90,
+    max: 90,
+    required: true
+  },
+  lon: {
+    type: Number,
+    min: -180,
+    max: 180,
+    required: true
+  },
+  _id: {
+    select: false
+  }
+})
+
 const SpomenikSchema = new mongoose.Schema({
   naslov: {
     type: String,
@@ -8,12 +26,13 @@ const SpomenikSchema = new mongoose.Schema({
     minlength: 3,
     maxlength: 64,
     unique: true,
-    required: true
+    required: true,
   },
   opis: {
     type: String,
     maxlength: 256,
     trim: true,
+    default: ''
   },
   kategorija: {
     type: String,
@@ -22,20 +41,13 @@ const SpomenikSchema = new mongoose.Schema({
     required: true
   },
   lokacija: {
-    lat: {
-      type: Number,
-      min: -90,
-      max: 90,
-      required: true
-    },
-    lon: {
-      type: Number,
-      min: -180,
-      max: 180,
-      required: true
-    }
+    type: Lokacija,
+    required: true,
   },
-  slika: String,
+  slika: {
+    type: String,
+    select: false
+  },
   imaSliku: {
     type: Boolean,
     default() { return Boolean(this.slika) }
@@ -56,11 +68,12 @@ const SpomenikSchema = new mongoose.Schema({
       max: 24
     }
   },
+  gmapPlaceId: String,
   __v: {
     type: Number,
-    select: false // ne sluzi versionKey
+    select: false
   }
-})
+}, {timestamps: true})
 
 SpomenikSchema.plugin(uniqueValidator) // mora da bi radilo unique
 
