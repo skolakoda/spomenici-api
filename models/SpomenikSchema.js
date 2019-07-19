@@ -46,7 +46,6 @@ const SpomenikSchema = new mongoose.Schema({
   },
   slika: {
     type: String,
-    select: false
   },
   imaSliku: {
     type: Boolean,
