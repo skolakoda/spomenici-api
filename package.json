@@ -15,7 +15,7 @@
     "mongoose": "^5.7.5",
     "mongoose-unique-validator": "^2.0.3",
     "nodemailer": "^6.2.1",
-    "sharp": "^0.22.1"
+    "sharp": "^0.30.5"
   },
   "devDependencies": {
     "eslint": "^5.16.0",
